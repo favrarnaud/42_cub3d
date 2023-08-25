@@ -86,6 +86,9 @@ re:
 leaks: all
 	leaks --atExit -- ./cub3d
 
+run: all
+	./cub3d maps/map_test.cub
+
 debug: fclean $(LIBS_TARGET) $(OBJS)
 	@tput setaf 2; cat ascii_art/cub3d_ascii; tput setaf 7
 	@echo "$(BLUE)Compilation des objets lier a cube3d en cours"
