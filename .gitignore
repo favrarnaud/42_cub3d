@@ -1,0 +1,5 @@
+.idea/
+*.o
+*.a
+cub3d
+.build
