@@ -45,7 +45,7 @@ OBJS			:=	$(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS			:=	$(OBJS:.o=.d)
 
 CC				:=	gcc
-CFLAGS			:=	-Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS			:=	-Wall -Wextra -Werror -g3 -fsanitize=address
 CPPFLAGS		:=	$(addprefix -I,$(INCS)) -MMD -MP
 LDFLAGS			:=	$(addprefix -L,$(dir $(LIBS_TARGET))) 
 LDLIBS			:=	$(addprefix -l,$(LIBS))
@@ -59,7 +59,7 @@ all: $(NAME)
 $(NAME): $(LIBS_TARGET) $(OBJS)
 	@tput setaf 2; cat ascii_art/cub3d_ascii; tput setaf 7
 	@echo "$(BLUE)Compilation des objets lier a cube3d en cours"
-	@$(CC) -Llibs/miniLibX -Llibs/libft -framework OpenGL -framework AppKit $(LDLIBS) $(OBJS) -o $(NAME) 
+	@$(CC) -Llibs/miniLibX -Llibs/libft -framework OpenGL -framework AppKit $(LDLIBS) $(OBJS) -o $(NAME) -fsanitize=address
 
 $(LIBS_TARGET):
 	@$(MAKE) -C $(@D)
@@ -85,9 +85,6 @@ re:
 
 leaks: all
 	leaks --atExit -- ./cub3d
-
-run: all
-	./cub3d maps/map_test.cub
 
 debug: fclean $(LIBS_TARGET) $(OBJS)
 	@tput setaf 2; cat ascii_art/cub3d_ascii; tput setaf 7
