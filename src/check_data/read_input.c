@@ -6,7 +6,7 @@
 /*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 12:37:22 by bberger           #+#    #+#             */
-/*   Updated: 2023/08/25 12:59:10 by bberger          ###   ########.fr       */
+/*   Updated: 2023/08/25 15:08:17 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ bool	set_tabs(t_data *data, int fd)
 	char	*str;
 	char	**tab;
 	char	no_dup;
-	int i = 2;
 
 	no_dup = 0;
 	str = get_next_line(fd);
@@ -81,7 +80,6 @@ bool	set_tabs(t_data *data, int fd)
 	{
 		if (empty_line(str) && no_dup != 63) // recolte  la non map
 		{
-			printf("bouh\n");
 			tab = ft_split(str, ' ');
 			replace_last_char(tab);
 			if (tab_size(tab) != 2)
@@ -93,14 +91,12 @@ bool	set_tabs(t_data *data, int fd)
 			if (!fill_data(data, tab, &no_dup))
 				return (false);
 		}
-		printf("%s %d %d\n", str, i++, no_dup);
 		free(str);
 		if (no_dup == 63)
 			break ;
 		str = get_next_line(fd);
 		//vire \n de str : str[ft_strlen(str) - 2] = '\0';
 	}
-	printf("check_Map\n");
 	return (check_map(data, fd));
 }
 

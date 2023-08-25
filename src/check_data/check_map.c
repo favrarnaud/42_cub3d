@@ -6,7 +6,7 @@
 /*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 14:43:39 by bberger           #+#    #+#             */
-/*   Updated: 2023/08/25 14:27:50 by bberger          ###   ########.fr       */
+/*   Updated: 2023/08/25 17:39:22 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ bool	verify_map(t_data *data)
 		return (false);
 	if (check_closed_map(data) == false)
 		return (false);
-	
 	return (true);
 	
 }

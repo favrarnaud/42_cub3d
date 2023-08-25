@@ -35,7 +35,8 @@ SRCS			:=	main.c \
 					check_data/data_utils.c \
 					check_data/check_texture.c \
 					check_data/check_map.c \
-					check_data/map_utils.c 
+					check_data/map_utils.c \
+					check_data/free_data.c 
 
 SRCS			:=	$(SRCS:%=$(SRC_DIR)/%)
 
@@ -44,7 +45,7 @@ OBJS			:=	$(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS			:=	$(OBJS:.o=.d)
 
 CC				:=	gcc
-CFLAGS			:=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			:=	-Wall -Wextra -Werror -g3 #-fsanitize=address
 CPPFLAGS		:=	$(addprefix -I,$(INCS)) -MMD -MP
 LDFLAGS			:=	$(addprefix -L,$(dir $(LIBS_TARGET))) 
 LDLIBS			:=	$(addprefix -l,$(LIBS))
@@ -58,7 +59,7 @@ all: $(NAME)
 $(NAME): $(LIBS_TARGET) $(OBJS)
 	@tput setaf 2; cat ascii_art/cub3d_ascii; tput setaf 7
 	@echo "$(BLUE)Compilation des objets lier a cube3d en cours"
-	@$(CC) -Llibs/miniLibX -Llibs/libft -framework OpenGL -framework AppKit $(LDLIBS) $(OBJS) -o $(NAME) -fsanitize=address
+	@$(CC) -Llibs/miniLibX -Llibs/libft -framework OpenGL -framework AppKit $(LDLIBS) $(OBJS) -o $(NAME) 
 
 $(LIBS_TARGET):
 	@$(MAKE) -C $(@D)
