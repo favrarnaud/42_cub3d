@@ -28,13 +28,6 @@ int check_stop(t_data *data, double x, double y)
 	return (1);
 }
 
-int 	set_color(int iter)
-{
-	if (iter % 10 == 0)
-		return(new_color(255, 0, 0, 0));
-	return(new_color(0, 0, 255, 0));
-}
-
 void	throw_ray(t_data *data, float angle, int iter)
 {
 	double	x;
@@ -56,7 +49,8 @@ void	throw_ray(t_data *data, float angle, int iter)
 	distance = sqrt(powf(x - data->ray.x - 0.5, 2.) + powf(y - data->ray.y - 0.5, 2.));
 	distance *= cos(degree_to_radians(angle - data->ray.angle));
 	wall_height = (data->mlx.screen_height / ( 0.5 * distance));
-	color = set_color(iter);
+	//color = define_face();
+	color = new_color(255, 0, 0, 0);
 	render_line(data, iter, data->ray.half_height - (wall_height / 2), data->ray.half_height + (wall_height / 2),color);
 }
 
@@ -71,9 +65,10 @@ void ray_casting(t_data *data)
 	angle_end = data->ray.angle + data->ray.fov / 2;
 	expand = data->ray.fov / data->mlx.screen_width;
 	i = 0;
-	while ((angle += expand) <= angle_end)
+	while (angle <= angle_end)
 	{
 		throw_ray(data, angle, i);
+		angle += expand;
 		i++;
 	}
 }

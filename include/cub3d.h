@@ -25,6 +25,15 @@
 #define true 1
 #define false 0
 
+typedef enum
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+	NONE
+}	wall_face;
+
 typedef struct s_img
 {
 	void	*mlx_img;
