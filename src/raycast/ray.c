@@ -12,47 +12,50 @@
 
 #include "cub3d.h"
 
-int check_wall(t_data *data, double x, double y)
+int check_wall(t_data *data, t_vec ray_vec)
 {
-	if (data->map.tab[(int)x][(int)y] == 1)
+	if (data->map.tab[(int)ray_vec.x][(int)ray_vec.y] == 1)
 		return (0);
 	return(1);
 }
 
-int check_stop(t_data *data, double x, double y)
+int check_stop(t_data *data, t_vec ray_vec)
 {
-	if (check_wall(data, x, y) == 0 ||
-		(x > data->ray.limit || x < 0) ||
-		(y > data->ray.limit || y < 0))
+	if (check_wall(data, ray_vec) == 0 ||
+		(ray_vec.x > data->ray.limit || ray_vec.x < 0) ||
+		(ray_vec.y > data->ray.limit || ray_vec.y < 0))
 		return (0);
 	return (1);
 }
 
 void	throw_ray(t_data *data, float angle, int iter)
 {
-	double	x;
-	double	y;
+	t_vec	start_vec;
+	t_vec	ray_vec;
 	double	distance;
 	double	wall_height;
 	int 	color;
 
-	x = data->ray.x;
-	y = data->ray.y;
+	start_vec.x = data->ray.x;
+	start_vec.y = data->ray.y;
+	ray_vec.x = data->ray.x;
+	ray_vec.y = data->ray.y;
 	float cosV = cos(degree_to_radians(angle)) / data->ray.precision;
 	float sinV = sin(degree_to_radians(angle)) / data->ray.precision;
 
-	while (check_stop(data, x, y))
+	while (check_stop(data, ray_vec))
 	{
-		x += sinV;
-		y += cosV;
+		ray_vec.x += sinV;
+		ray_vec.y += cosV;
 	}
-	distance = sqrt(powf(x - data->ray.x - 0.5, 2.) + powf(y - data->ray.y - 0.5, 2.));
+	distance = sqrt(powf(ray_vec.x - data->ray.x - 0.5, 2.) + powf(ray_vec.y - data->ray.y - 0.5, 2.));
 	distance *= cos(degree_to_radians(angle - data->ray.angle));
 	wall_height = (data->mlx.screen_height / ( 0.5 * distance));
-	//color = define_face();
-	color = new_color(255, 0, 0, 0);
-	render_line(data, iter, data->ray.half_height - (wall_height / 2), data->ray.half_height + (wall_height / 2),color);
+	color = set_color(define_face(substract_vec(ray_vec, start_vec)));
+	render_line(data, iter, data->ray.half_height - (wall_height / 2), data->ray.half_height + (wall_height / 2), color);
 }
+
+
 
 void ray_casting(t_data *data)
 {

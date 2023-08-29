@@ -27,7 +27,6 @@ SRCS			:=	main.c \
 					utils/radians.c \
 					utils/tab.c \
 					utils/draw_utils.c \
-					utils/float_utils.c \
 					utils/malloc.c \
 					raycast/ray.c \
 					check_data/read_input.c \

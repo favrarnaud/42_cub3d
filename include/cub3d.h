@@ -44,8 +44,8 @@ typedef struct s_img
 }	t_img;
 
 typedef struct s_vec {
-	float x;
-	float y;
+	double x;
+	double y;
 }	t_vec;
 
 typedef struct s_ray {
@@ -143,17 +143,18 @@ void	print_vector(t_vec *vec);
 // ---> UTILS
 //radians.c
 double	degree_to_radians(float degree);
+t_vec	create_vec(double x, double y);
+int set_color(wall_face face);
+int		define_face(t_vec ray);
+t_vec computeFirstIntersect(double angle);
+t_vec	substract_vec(t_vec a, t_vec b);
 //tab.c
-void	print_int_tab(int *tab);
-void	print_char_tab(char **tab);
 void	print_map(t_data *data);
 
 //draw_utils.c
 int		new_color(int r, int g, int b, int a);
 void	render_rect(t_data *data, int x, int y, int height, int width, int color);
 void	render_line(t_data *data, int col, int start, int end, int color);
-//float_utils.c
-char	*ftoa(float n, char* res, int afterpoint);
 // malloc.c
 void *pro_malloc(size_t size);
 
