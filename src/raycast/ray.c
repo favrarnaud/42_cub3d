@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afavre <afavre@student.42lausanne>         +#+  +:+       +#+        */
+/*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:07:42 by afavre            #+#    #+#             */
-/*   Updated: 2023/08/09 11:07:44 by afavre           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:35:36 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	throw_ray(t_data *data, float angle, int iter)
 		}
 	}
 }
+
+
 
 void ray_casting(t_data *data)
 {
