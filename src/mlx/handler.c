@@ -52,23 +52,23 @@ int move_key(int keycode, void *param) {
 
 	if (keycode == KEY_A)
 	{
-		data->ray.x -= dy;
-		data->ray.y += dx;
+		data->ray.player_pos.x -= dy;
+		data->ray.player_pos.y += dx;
 	}
 	if (keycode == KEY_S)
 	{
-		data->ray.x -= dx;
-		data->ray.y -= dy;
+		data->ray.player_pos.x -= dx;
+		data->ray.player_pos.y -= dy;
 	}
 	if (keycode == KEY_D)
 	{
-		data->ray.x += dy;
-		data->ray.y -= dx;
+		data->ray.player_pos.x += dy;
+		data->ray.player_pos.y -= dx;
 	}
 	if (keycode == KEY_W)
 	{
-		data->ray.x += dx;
-		data->ray.y += dy;
+		data->ray.player_pos.x += dx;
+		data->ray.player_pos.y += dy;
 	}
 	update_img(data);
 	return (0);

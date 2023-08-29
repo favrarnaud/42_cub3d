@@ -20,7 +20,7 @@
 		 exit(1);
 	 init_mlx(&data);
 	 init_data(&data);
-	 init_img(&data);
+	 draw_background(&data);
 	 ray_casting(&data);
 	 update_img(&data);
 	 mlx_loop(data.mlx.ptr);

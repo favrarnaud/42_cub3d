@@ -12,46 +12,61 @@
 
 #include "cub3d.h"
 
-int check_wall(t_data *data, double x, double y)
-{
-	if (data->map.tab[(int)x][(int)y] == 1)
-		return (0);
-	return(1);
-}
-
-int check_stop(t_data *data, double x, double y)
-{
-	if (check_wall(data, x, y) == 0 ||
-		(x > data->ray.limit || x < 0) ||
-		(y > data->ray.limit || y < 0))
-		return (0);
-	return (1);
-}
-
 void	throw_ray(t_data *data, float angle, int iter)
 {
-	double	x;
-	double	y;
-	double	distance;
-	double	wall_height;
-	int 	color;
+	(void)iter;
+	float rayDirX = cos(angle);
+	float rayDirY = sin(angle);
+	int mapX = (int)(data->ray.player_pos.x);
+	int mapY = (int)(data->ray.player_pos.y);
+	float deltaDistX = fabs(1 / rayDirX);
+	float deltaDistY = fabs(1 / rayDirY);
+	float sideDistX;
+	float sideDistY;
+	int stepX;
+	int stepY;
 
-	x = data->ray.x;
-	y = data->ray.y;
-	float cosV = cos(degree_to_radians(angle)) / data->ray.precision;
-	float sinV = sin(degree_to_radians(angle)) / data->ray.precision;
-
-	while (check_stop(data, x, y))
+	if (rayDirX < 0)
 	{
-		x += sinV;
-		y += cosV;
+		stepX = -1;
+		sideDistX = (data->ray.player_pos.x - mapX) * deltaDistX;
 	}
-	distance = sqrt(powf(x - data->ray.x - 0.5, 2.) + powf(y - data->ray.y - 0.5, 2.));
-	distance *= cos(degree_to_radians(angle - data->ray.angle));
-	wall_height = (data->mlx.screen_height / ( 0.5 * distance));
-	//color = define_face();
-	color = new_color(255, 0, 0, 0);
-	render_line(data, iter, data->ray.half_height - (wall_height / 2), data->ray.half_height + (wall_height / 2),color);
+	else
+	{
+		stepX = 1;
+		sideDistX = (mapX + 1.0 - data->ray.player_pos.x) * deltaDistX;
+	}
+
+	if (rayDirY < 0)
+	{
+		stepY = -1;
+		sideDistY = (data->ray.player_pos.y - mapY) * deltaDistY;
+	}
+	else
+	{
+		stepY = 1;
+		sideDistY = (mapY + 1.0 - data->ray.player_pos.y) * deltaDistY;
+	}
+
+	int hit = 0;
+	while (hit == 0)
+	{
+		if (sideDistX < sideDistY)
+		{
+			sideDistX += deltaDistX;
+			mapX += stepX;
+			if (data->map.tab[mapX][mapY] == 1)
+				hit = 1;
+			render_line(data, iter, 10, 900, new_color(255, 0, 0, 0));
+		}
+		else
+		{
+			sideDistY += deltaDistY;
+			mapY += stepY;
+			if (data->map.tab[mapX][mapY] == 1)
+				hit = 1;
+		}
+	}
 }
 
 void ray_casting(t_data *data)

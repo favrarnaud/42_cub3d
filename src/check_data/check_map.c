@@ -104,6 +104,7 @@ bool	check_map(t_data *data, int fd)
 		str = get_next_line(fd);
 	}
 	tab_tmp = ft_split(tmp, '\n');
+	free(tmp);
 	data->map.h_map = tab_size(tab_tmp) + 2;
 	data->map.l_map = longest_str(tab_tmp) + 2;
 	data->map.map = pro_malloc((data->map.h_map + 1) * (sizeof(char *)));

@@ -78,6 +78,7 @@ bool	set_tabs(t_data *data, int fd)
 	//vire \n de str : str[ft_strlen(str) - 2] = '\0';
 	while (str)
 	{
+		printf("lajoie ------> %s\n", str);
 		if (empty_line(str) && no_dup != 63) // recolte  la non map
 		{
 			tab = ft_split(str, ' ');

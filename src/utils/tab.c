@@ -12,18 +12,6 @@
 
 #include "cub3d.h"
 
-void	print_int_tab(int *tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-	{
-		printf("%d ", tab[i]);
-		i++;
-	}
-}
-
 void	print_map(t_data *data)
 {
 	int h;
@@ -39,24 +27,6 @@ void	print_map(t_data *data)
 			l++;
 		}
 		printf("\n");
-		h++;
-	}
-}
-
-void	print_char_tab(char **tab)
-{
-	int h;
-	int l;
-
-	h = 0;
-	while (tab[h])
-	{
-		l = 0;
-		while (tab[h][l])
-		{
-			printf("%c", tab[h][l]);
-			l++;
-		}
 		h++;
 	}
 }

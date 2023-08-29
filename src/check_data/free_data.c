@@ -30,7 +30,9 @@ void	free_all(t_data *data)
 	free(&data->texture.SO_path);
 	free(&data->texture.WE_path);
 	free(&data->texture.EA_path);
+	printf("DUCON DUCON DUCON \n");
+	print_map(data);
 	free_tab(data->map.map);
-	free_int_tab(&data->texture.F_color);
-	free_int_tab(&data->texture.C_color);
+	//free_int_tab(&data->texture.F_color);
+	//free_int_tab(&data->texture.C_color);
 }

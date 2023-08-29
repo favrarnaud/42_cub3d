@@ -43,17 +43,14 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_vec {
-	float x;
-	float y;
-}	t_vec;
+typedef struct s_point {
+	double x;
+	double y;
+}	t_point;
 
 typedef struct s_ray {
-	float	x;
-	float 	y;
+	t_point	player_pos;
 	float	fov;
-	float	limit;
-	float 	precision;
 	float	angle;
 	int		half_height;
 
@@ -80,8 +77,8 @@ typedef struct s_texture
 	char	*SO_path;
 	char	*WE_path;
 	char	*EA_path;
-	int		*F_color;
-	int		*C_color;
+	int		F_color;
+	int		C_color;
 	
 }	t_texture;
 
@@ -100,7 +97,7 @@ void	init_mlx(t_data *data);
 //handler.c
 void	init_event(t_data *data);
 //draw.c
-void	init_img(t_data *data);
+void	draw_background(t_data *data);
 void	update_img(t_data *data);
 
 // --> CHECK_DATA
@@ -129,6 +126,7 @@ bool	check_char_dup(char **map, int *dup);
 bool	check_closed_map(t_data *data);
 
 // free_data.c
+void	free_int_tab(int **tab);
 void	free_all(t_data *data);
 
 // --> DATA
@@ -140,23 +138,18 @@ int		init_data(t_data *data);
 void	gen_map(t_data *data);
 void	clear_map(t_data *data);
 void	print_map(t_data *data);
-//vector.c
-void	print_vector(t_vec *vec);
 
 // ---> UTILS
-//radians.c
+//ray.c
 double	degree_to_radians(float degree);
+t_point	create_point(double x, double y);
 //tab.c
-void	print_int_tab(int *tab);
-void	print_char_tab(char **tab);
 void	print_map(t_data *data);
 
 //draw_utils.c
 int		new_color(int r, int g, int b, int a);
 void	render_rect(t_data *data, int x, int y, int height, int width, int color);
 void	render_line(t_data *data, int col, int start, int end, int color);
-//float_utils.c
-char	*ftoa(float n, char* res, int afterpoint);
 // malloc.c
 void *pro_malloc(size_t size);
 

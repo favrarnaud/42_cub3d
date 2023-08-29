@@ -26,11 +26,6 @@ void	draw_background(t_data *data)
 	color_floor);
 }
 
-void	init_img(t_data *data)
-{
-	draw_background(data);
-}
-
 void	update_img(t_data *data)
 {
 	draw_background(data);

@@ -18,12 +18,9 @@
 
 void	init_ray(t_data *data)
 {
-	data->ray.angle = 180;
-	data->ray.limit = 50;
-	data->ray.precision = 999;
+	data->ray.angle = 0;
 	data->ray.fov = 60;
-	data->ray.x = 1;
-	data->ray.y = 1;
+	data->ray.player_pos = create_point(5, 5);
 	data->ray.half_height = data->mlx.screen_height / 2;
 }
 

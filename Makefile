@@ -24,10 +24,9 @@ SRCS			:=	main.c \
 					mlx/draw.c \
 					data/init_data.c\
 					debug/map.c \
-					utils/radians.c \
+					utils/ray.c \
 					utils/tab.c \
 					utils/draw_utils.c \
-					utils/float_utils.c \
 					utils/malloc.c \
 					raycast/ray.c \
 					check_data/read_input.c \
@@ -45,7 +44,7 @@ OBJS			:=	$(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS			:=	$(OBJS:.o=.d)
 
 CC				:=	gcc
-CFLAGS			:=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			:=	-Wall -Wextra -Werror
 CPPFLAGS		:=	$(addprefix -I,$(INCS)) -MMD -MP
 LDFLAGS			:=	$(addprefix -L,$(dir $(LIBS_TARGET))) 
 LDLIBS			:=	$(addprefix -l,$(LIBS))
@@ -59,7 +58,7 @@ all: $(NAME)
 $(NAME): $(LIBS_TARGET) $(OBJS)
 	@tput setaf 2; cat ascii_art/cub3d_ascii; tput setaf 7
 	@echo "$(BLUE)Compilation des objets lier a cube3d en cours"
-	@$(CC) -Llibs/miniLibX -Llibs/libft -framework OpenGL -framework AppKit $(LDLIBS) $(OBJS) -o $(NAME) -fsanitize=address
+	@$(CC) -Llibs/miniLibX -Llibs/libft -framework OpenGL -framework AppKit $(LDLIBS) $(OBJS) -o $(NAME)
 
 $(LIBS_TARGET):
 	@$(MAKE) -C $(@D)
@@ -84,7 +83,10 @@ re:
 	@$(MAKE) all
 
 leaks: all
-	leaks --atExit -- ./cub3d
+	leaks --atExit -- ./cub3d maps/map_test.cub
+
+run: all
+	./cub3d maps/map_test.cub
 
 debug: fclean $(LIBS_TARGET) $(OBJS)
 	@tput setaf 2; cat ascii_art/cub3d_ascii; tput setaf 7

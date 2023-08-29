@@ -52,7 +52,7 @@ int	flood_fill_map(t_data *data, int h, int l)
 {
 	if (data->map.map[h][l] == 'x')
 	{
-		printf("map not valid\n");
+		printf("Hole in the wall of your map\n");
 		exit(1);
 	}
 	else if (h < 0 || h >= data->map.h_map || l < 0 || l >= data->map.l_map
@@ -68,7 +68,6 @@ int	flood_fill_map(t_data *data, int h, int l)
 	flood_fill_map(data, h + 1, l - 1);
 	flood_fill_map(data, h + 1, l);
 	flood_fill_map(data, h + 1, l + 1);
-
 	return (0);
 }
 	
