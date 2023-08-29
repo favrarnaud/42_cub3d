@@ -34,7 +34,8 @@ SRCS			:=	main.c \
 					check_data/data_utils.c \
 					check_data/check_texture.c \
 					check_data/check_map.c \
-					check_data/map_utils.c 
+					check_data/map_utils.c \
+					check_data/free_data.c 
 
 SRCS			:=	$(SRCS:%=$(SRC_DIR)/%)
 
@@ -83,9 +84,6 @@ re:
 
 leaks: all
 	leaks --atExit -- ./cub3d
-
-run: all
-	./cub3d maps/map_test.cub
 
 debug: fclean $(LIBS_TARGET) $(OBJS)
 	@tput setaf 2; cat ascii_art/cub3d_ascii; tput setaf 7

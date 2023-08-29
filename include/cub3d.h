@@ -6,7 +6,7 @@
 /*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:03:07 by afavre            #+#    #+#             */
-/*   Updated: 2023/08/25 11:51:14 by bberger          ###   ########.fr       */
+/*   Updated: 2023/08/25 17:00:26 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,12 @@ bool	check_EA_fill(t_data *data, char **tab, char *no_dup);
 // check_map.c
 bool	check_map(t_data *data, int fd);
 
-// utils_map.c
+// map_utils.c
 bool	check_char_dup(char **map, int *dup);
 bool	check_closed_map(t_data *data);
+
+// free_data.c
+void	free_all(t_data *data);
 
 // --> DATA
 //init_data.c
