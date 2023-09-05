@@ -24,10 +24,15 @@ void	init_ray(t_data *data)
 	data->ray.half_height = data->mlx.screen_height / 2;
 }
 
-int	init_data(t_data *data)
+void	init_data(t_data *data)
 {
 	data->map.map_size = 10;
 	gen_map(data);
 	init_ray(data);
-	return (0);
+	data->texture.no_dup.north = 0;
+	data->texture.no_dup.south = 0;
+	data->texture.no_dup.east = 0;
+	data->texture.no_dup.west = 0;
+	data->texture.no_dup.floor = 0;
+	data->texture.no_dup.ceilling = 0;
 }

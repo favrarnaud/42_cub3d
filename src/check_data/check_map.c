@@ -12,17 +12,16 @@
 
 #include "cub3d.h"
 
-bool	verify_map(t_data *data)
+int	verify_map(t_data *data)
 {
 	int dup;
 
 	dup = 0;
-	if (check_char_dup(data->map.map, &dup) == false)
-		return (false);
-	if (check_closed_map(data) == false)
-		return (false);
-	return (true);
-	
+	if (check_char_dup(data, &dup) == -1)
+		return (-1);
+	if (check_closed_map(data) == -1)
+		return (-1);
+	return (0);
 }
 
 void	fill_tab_x(char **map, int tab_len, int len)
@@ -81,7 +80,7 @@ int	longest_str(char **tab_tmp)
 	return (max_len);
 }
 
-bool	check_map(t_data *data, int fd)
+int		check_map(t_data *data, int fd)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -97,6 +96,8 @@ bool	check_map(t_data *data, int fd)
 	}
 	while (str)
 	{
+		if (divided_line(str) == -1)
+			return (-1);
 		tmp2 = tmp;
 		tmp = ft_strjoin(tmp, str);
 		free(tmp2);
@@ -112,5 +113,4 @@ bool	check_map(t_data *data, int fd)
 	fill_map(data->map.map, tab_tmp, data->map.h_map);
 	print_map(data);
 	return (verify_map(data));
-	// then check map values (no hole in walls, only one N/S/E/O and only 1 or 0)
 }

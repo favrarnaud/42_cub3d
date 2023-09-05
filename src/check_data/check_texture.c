@@ -18,110 +18,106 @@ int	check_xpm_file(char *str)
 	if (ft_strlen(str) < 5)
 	{
 		printf("Error: texture file must be longer than 5 letters!");
-		return (1);
+		return (-1);
 	}
 	else if (ft_strncmp(&str[ft_strlen(str) - 4], ".xpm", 4) != 0)
 	{
 		printf("Error: texture must be a .xpm file");
-		return (2);
+		return (-1);
 	}
 	return (0);
 }
 
 // check if NO file is fill in data struct, access fct allows to check if path is valid, (2^0 = 1)
-bool	check_NO_fill(t_data *data, char **tab, char *no_dup)
+int	check_NO_fill(t_data *data, char **tab)
 {
 	if (ft_strncmp("NO", tab[0], 2))
-		return (false);
-	if (*no_dup & 1)
+		return (1);
+	if (data->texture.no_dup.north == 1)
 	{
-		printf("ERROR : Doublon dans NO");
-		return (false);
+		printf("ERROR : Doublon dans NO\n");
+		return (-1);
 	}
-	*no_dup += 1;
+	data->texture.no_dup.north = 1;
 	if (access(tab[1], R_OK))
 	{
 		printf("ERROR : Fichier de NO inaccessible\n");
-		return (false);
+		return (-1);
 	}
 	if (check_xpm_file(tab[1]) != 0)
-		return (false);
+		return (-1);
 	data->texture.NO_path = pro_malloc(sizeof(char) * \
 	(ft_strlen(tab[1]) + 1));
 	data->texture.NO_path = ft_strdup(tab[1]);
-	printf("%s\n", data->texture.NO_path);
-	return (true);
+	return (0);
 }
 
 // 2^1 = 2
-bool	check_SO_fill(t_data *data, char **tab, char *no_dup)
+int	check_SO_fill(t_data *data, char **tab)
 {
 	if (ft_strncmp("SO", tab[0], 2))
-		return (false);
-	if (*no_dup & 2)
+		return (1);
+	if (data->texture.no_dup.south == 1)
 	{
-		printf("ERROR : Doublon dans SO");
-		return (false);
+		printf("ERROR : Doublon dans SO\n");
+		return (-1);
 	}
-	*no_dup += 2;
+	data->texture.no_dup.south = 1;
 	if (access(tab[1], R_OK))
 	{
 		printf("ERROR : Fichier de SO inaccessible\n");
-		return (false);
+		return (-1);
 	}
 	if (check_xpm_file(tab[1]) != 0)
-		return (false);
+		return (-1);
 	data->texture.SO_path = pro_malloc(sizeof(char) * \
 	(ft_strlen(tab[1]) + 1));
 	data->texture.SO_path = ft_strdup(tab[1]);
-	printf("%s\n", data->texture.SO_path);
-	return (true);
+	return (0);
 }
 
-bool	check_WE_fill(t_data *data, char **tab, char *no_dup)
+int	check_WE_fill(t_data *data, char **tab)
 {
 	if (ft_strncmp("WE", tab[0], 2))
-		return (false);
-	if (*no_dup & 4)
+		return (1);
+	if (data->texture.no_dup.west == 1)
 	{
 		printf("ERROR : Doublon dans WE\n");
-		return (false);
+		return (-1);
 	}
-	*no_dup += 4;
+	data->texture.no_dup.west = 1;
 	if (access(tab[1], R_OK))
 	{
 		printf("ERROR : Fichier de WE inaccessible\n");
-		return (false);
+		return (-1);
 	}
-	if (check_xpm_file(tab[1]) != 0)
-		return (false);
+	if (check_xpm_file(tab[1]) == -1)
+		return (-1);
 	data->texture.WE_path = pro_malloc(sizeof(char) * \
 	(ft_strlen(tab[1]) + 1));
 	data->texture.WE_path = ft_strdup(tab[1]);
-	printf("%s\n", data->texture.WE_path);
-	return (true);
+	return (0);
 }
 
-bool	check_EA_fill(t_data *data, char **tab, char *no_dup)
+int	check_EA_fill(t_data *data, char **tab)
 {
 	if (ft_strncmp("EA", tab[0], 2))
-		return (false);
-	if (*no_dup & 8)
+		return (1);
+	if (data->texture.no_dup.east == 1)
 	{
 		printf("ERROR : Doublon dans EA\n");
-		return (false);
+		return (-1);
 	};
-	*no_dup += 8;
+	data->texture.no_dup.east = 1;
 	if (access(tab[1], R_OK))
 	{
 		printf("ERROR : Fichier de EA inaccessible\n");
-		return (false);
+		return (-1);
 	}
-	if (check_xpm_file(tab[1]) != 0)
-		return (false);
+	if (check_xpm_file(tab[1]) == -1)
+		return (-1);
 	data->texture.EA_path = pro_malloc(sizeof(char) * \
 	(ft_strlen(tab[1]) + 1));
 	data->texture.EA_path = ft_strdup(tab[1]);
-	printf("%s\n", data->texture.EA_path);
-	return (true);
+	return (0);
 }

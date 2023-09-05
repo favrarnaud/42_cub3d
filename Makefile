@@ -28,6 +28,8 @@ SRCS			:=	main.c \
 					utils/tab.c \
 					utils/draw_utils.c \
 					utils/malloc.c \
+					utils/read_utils.c \
+					utils/error.c \
 					raycast/ray.c \
 					check_data/read_input.c \
 					check_data/fill_data.c \

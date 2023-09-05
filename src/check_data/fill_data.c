@@ -11,20 +11,8 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-void	print_color(int *tab)
-{
-	int i;
-	
-	i = 0;
-	while (i < 3)
-	{
-		printf("%d\n", tab[i]);
-		
-		i++;
-	}
-}
 
-bool	check_F_fill(t_data *data, char **tab, char *no_dup)
+int	check_F_fill(t_data *data, char **tab)
 {
 	int		rgb;
 	int		i;
@@ -33,17 +21,17 @@ bool	check_F_fill(t_data *data, char **tab, char *no_dup)
 	int 	*cold;
 
 	if (ft_strncmp("F", tab[0], 1))
-		return (false);
-	if (*no_dup & 16)//2^4 = 16
+		return (1);
+	if (data->texture.no_dup.floor == 1)
 	{
 		printf("ERROR : Doublon dans floor color\n");
-		return (false);
+		return (-1);
 	}
-	*no_dup += 16;
+	data->texture.no_dup.floor = 1;
 	cold = pro_malloc(sizeof(int) * (3));
 	tmp = ft_split(tab[1], ',');
 	if (tab_size(tmp) != 3)
-		return (false);
+		return (-1);
 	i = 0;
 	while (i < 3)
 	{
@@ -53,7 +41,7 @@ bool	check_F_fill(t_data *data, char **tab, char *no_dup)
 			if (tmp[i][j] < '0' || tmp[i][j] > '9')
 			{
 				free_tab(tmp);
-				return (false);
+				return (-1);
 			}
 			j++;
 		}
@@ -61,21 +49,19 @@ bool	check_F_fill(t_data *data, char **tab, char *no_dup)
 		if (rgb < 0 || rgb > 255)
 		{
 			free_tab(tmp);
-			return (false);
+			return (-1);
 		}	
 		cold[i] = rgb;
 		i++;
 	}
 	data->texture.F_color = new_color(cold[0], cold[1], cold[2], 0);
-	printf("F: %d\n", data->texture.F_color);
 	free(cold);
 	free_tab(tmp);
-	return (true);
+	return (0);
 }
 
-bool	check_C_fill(t_data *data, char **tab, char *no_dup)
+int	check_C_fill(t_data *data, char **tab)
 {
-	printf("lajoie est pas la \n");
 	int		rgb;
 	int		i;
 	int		j;
@@ -83,21 +69,17 @@ bool	check_C_fill(t_data *data, char **tab, char *no_dup)
 	int 	*cold;
 
 	if (ft_strncmp("C", tab[0], 1))
-	{
-		printf("tu e 1 conar\n");
-		return (false);
-	}
-
-	if (*no_dup & 32)
+		return (1);
+	if (data->texture.no_dup.ceilling == 1)
 	{
 		printf("ERROR : Doublon dans ceilling color\n");
-		return (false);
+		return (-1);
 	}
-	*no_dup += 32;
+	data->texture.no_dup.ceilling = 1;
 	cold = pro_malloc(sizeof(int) * 3);
 	tmp = ft_split(tab[1], ',');
 	if (tab_size(tmp) != 3)
-		return (false);
+		return (-1);
 	i = 0;
 	while (i < 3)
 	{
@@ -107,7 +89,7 @@ bool	check_C_fill(t_data *data, char **tab, char *no_dup)
 			if (tmp[i][j] < '0' || tmp[i][j] > '9')
 			{
 				free_tab(tmp);
-				return (false);
+				return (-1);
 			}
 			j++;
 		}
@@ -115,33 +97,49 @@ bool	check_C_fill(t_data *data, char **tab, char *no_dup)
 		if (rgb < 0 || rgb > 255)
 		{
 			free_tab(tmp);
-			return (false);
+			return (-1);
 		}	
 		cold[i] = rgb;
 		i++;
 	}
 	data->texture.C_color = new_color(cold[0], cold[1], cold[2], 0);
-	printf("C: %d\n", data->texture.C_color);
 	free(cold);
 	free_tab(tmp);
-	return (true);
+	return (0);
 }
 
-bool	fill_data(t_data *data, char **tab, char *no_dup)
-{	
+int	check_dbstruct(t_data *data)
+{
+	int res;
 
-	bool	option;
+	res = 0;
+	res += data->texture.no_dup.north;
+	res += data->texture.no_dup.south;
+	res += data->texture.no_dup.east;
+	res += data->texture.no_dup.west;
+	res += data->texture.no_dup.floor;
+	res += data->texture.no_dup.ceilling;
+
+	return (res);
+}
+
+int	fill_data(t_data *data, char **tab)
+{
 	
-	option = false;
-	
-	option = check_NO_fill(data, tab, no_dup) || \
-	check_SO_fill(data, tab, no_dup) || \
-	check_WE_fill(data, tab, no_dup) || \
-	check_EA_fill(data, tab, no_dup) || \
-	check_C_fill(data, tab, no_dup) || \
-	check_F_fill(data, tab, no_dup);
+	if (check_NO_fill(data, tab) == -1)
+		return (-1);
+	if (check_SO_fill(data, tab) == -1)
+		return (-1);
+	if (check_WE_fill(data, tab) == -1)
+		return (-1);
+	if (check_EA_fill(data, tab) == -1)
+		return (-1);
+	if (check_F_fill(data, tab) == -1)
+		return (-1);
+	if (check_C_fill(data, tab) == -1)
+		return (-1);
 	
 	free_tab(tab);
-	return (option);
+	return (0);
 }
 

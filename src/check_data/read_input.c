@@ -60,26 +60,23 @@ int	ft_check_av(int ac, char **av)
 	}
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		printf("File could not be openned!");
+	printf("File could not be openned!");
 	return (fd);
 }
 
 
 
 //  set 3 tabs (1. chemin des textures, 2.couleurs du floor, 3. map)
-bool	set_tabs(t_data *data, int fd)
+int	set_tabs(t_data *data, int fd)
 {
 	char	*str;
 	char	**tab;
-	char	no_dup;
 
-	no_dup = 0;
 	str = get_next_line(fd);
-	//vire \n de str : str[ft_strlen(str) - 2] = '\0';
 	while (str)
 	{
-		printf("lajoie ------> %s\n", str);
-		if (empty_line(str) && no_dup != 63) // recolte  la non map
+		//printf("test --> %s\n", str);
+		if (empty_line(str) && data->texture.no_dup.south != 63)
 		{
 			tab = ft_split(str, ' ');
 			replace_last_char(tab);
@@ -87,17 +84,18 @@ bool	set_tabs(t_data *data, int fd)
 			{
 				free(str);
 				free_tab(tab);
-				return (false);
+				return(print_error("Incorrect informations format"));
 			}
-			if (!fill_data(data, tab, &no_dup))
-				return (false);
+			if (fill_data(data, tab) == -1)
+				return (-1);
 		}
 		free(str);
-		if (no_dup == 63)
+		if (check_dbstruct(data) == 6)
 			break ;
 		str = get_next_line(fd);
-		//vire \n de str : str[ft_strlen(str) - 2] = '\0';
 	}
+	if (check_dbstruct(data) != 6)
+		print_error("Parametre premap incorrect");
 	return (check_map(data, fd));
 }
 
@@ -109,8 +107,8 @@ int	read_input(int ac, char **av, t_data *data)
 	fd = ft_check_av(ac, av);
 	if (fd < 0)
 		return (fd);
-	else if(set_tabs(data, fd) == false)
-		return (-4);
+	else if(set_tabs(data, fd) == -1)
+		return (-1);
 	return (0);
 }
 

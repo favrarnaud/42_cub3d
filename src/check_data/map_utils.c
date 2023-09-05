@@ -12,31 +12,42 @@
 
 #include "cub3d.h"
 
-bool	check_char_dup(char **map, int *dup)
+int	check_char_dup(t_data *data, int *dup)
 {
 	int	l;
 	int h;
 
 	h = 0;
-	while (map[h])
+	while (data->map.map[h])
 	{
 		l = 0;
-		while (map[h][l])
+		while (data->map.map[h][l])
 		{
-			if (map[h][l] == 'x' || map[h][l] == '0' || map[h][l] == '1')
+			if (data->map.map[h][l] == 'x' || data->map.map[h][l] == '0' || \
+				data->map.map[h][l] == '1')
 				l++;
-			else if ((map[h][l] == 'N' || map[h][l] == 'S' || \
-			map[h][l] == 'E' || map[h][l] == 'W') && !*dup)
+			else if ((data->map.map[h][l] == 'N' || data->map.map[h][l] == 'S' || \
+			data->map.map[h][l] == 'E' || data->map.map[h][l] == 'W') && !*dup)
 			{
+//				data->ray.player_pos.x = h - 1;
+//				data->ray.player_pos.y = l - 1;
+//				if (data->map.map[h][l] == 'N')
+//					data->ray.angle = 270;
+//				else if (data->map.map[h][l] == 'S')
+//					data->ray.angle = 90;
+//				else if (data->map.map[h][l] == 'W')
+//					data->ray.angle = 180;
+//				else if (data->map.map[h][l] == 'E')
+//					data->ray.angle = 0;
 				*dup = 1;
 				l++;
 			}
 			else
-				return (false);
+				return (-1);
 		}	
 		h++;
 	}
-	return (true);
+	return (0);
 }
 
 int	is_letter(char c)
@@ -71,7 +82,7 @@ int	flood_fill_map(t_data *data, int h, int l)
 	return (0);
 }
 	
-bool	check_closed_map(t_data *data)
+int	check_closed_map(t_data *data)
 {
 	int	h;
 	int	l;
@@ -95,5 +106,5 @@ bool	check_closed_map(t_data *data)
 		}
 		h++;
 	}
-	return (true);
+	return (0);
 }

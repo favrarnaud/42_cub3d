@@ -21,10 +21,6 @@
 #include "../libs/miniLibX/mlx.h"
 #include "key.h"
 
-#define bool _Bool
-#define true 1
-#define false 0
-
 typedef enum
 {
 	NORTH,
@@ -33,6 +29,16 @@ typedef enum
 	WEST,
 	NONE
 }	wall_face;
+
+typedef struct s_nodb
+{
+	int north;
+	int south;
+	int east;
+	int west;
+	int floor;
+	int ceilling;
+} t_nodb;
 
 typedef struct s_img
 {
@@ -73,6 +79,7 @@ typedef struct s_mlx {
 
 typedef struct s_texture
 {
+	t_nodb 	no_dup;
 	char	*NO_path;
 	char	*SO_path;
 	char	*WE_path;
@@ -105,7 +112,8 @@ void	update_img(t_data *data);
 int		read_input(int ac, char **av, t_data *data);
 
 // fill_data.c
-bool	fill_data(t_data *data, char **tab, char *no_dup);
+int	check_dbstruct(t_data *data);
+int	fill_data(t_data *data, char **tab);
 
 // data_utils.c
 int		empty_line(char *str);
@@ -113,25 +121,31 @@ void	free_tab(char **tab);
 int		tab_size(char **tab);
 
 // check_texture.c
-bool	check_NO_fill(t_data *data, char **tab, char *no_dup);
-bool	check_SO_fill(t_data *data, char **tab, char *no_dup);
-bool	check_WE_fill(t_data *data, char **tab, char *no_dup);
-bool	check_EA_fill(t_data *data, char **tab, char *no_dup);
+int	check_NO_fill(t_data *data, char **tab);
+int	check_SO_fill(t_data *data, char **tab);
+int	check_WE_fill(t_data *data, char **tab);
+int	check_EA_fill(t_data *data, char **tab);
 
 // check_map.c
-bool	check_map(t_data *data, int fd);
+int	check_map(t_data *data, int fd);
 
 // map_utils.c
-bool	check_char_dup(char **map, int *dup);
-bool	check_closed_map(t_data *data);
+int	check_char_dup(t_data *data, int *dup);
+int	check_closed_map(t_data *data);
 
 // free_data.c
 void	free_int_tab(int **tab);
 void	free_all(t_data *data);
 
+// read_utils.c
+int	divided_line(char *str);
+
+// error.c
+int	print_error(char *msg);
+
 // --> DATA
 //init_data.c
-int		init_data(t_data *data);
+void		init_data(t_data *data);
 
 // ---> DEBUG
 //map.c
