@@ -80,7 +80,7 @@ int	longest_str(char **tab_tmp)
 	return (max_len);
 }
 
-int		check_map(t_data *data, int fd)
+int		check_map(t_data *data, int fd, char *fstr)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -88,7 +88,8 @@ int		check_map(t_data *data, int fd)
 	char	*str;
 	
 	tmp = NULL;
-	str = get_next_line(fd);
+	str = ft_strdup(fstr);
+	free(fstr);
 	while (str && !empty_line(str))
 	{
 		free(str);
@@ -111,6 +112,5 @@ int		check_map(t_data *data, int fd)
 	data->map.map = pro_malloc((data->map.h_map + 1) * (sizeof(char *)));
 	fill_tab_x(data->map.map, data->map.h_map - 2, data->map.l_map - 2);
 	fill_map(data->map.map, tab_tmp, data->map.h_map);
-	print_map(data);
 	return (verify_map(data));
 }

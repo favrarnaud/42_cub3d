@@ -19,6 +19,7 @@
 	 init_data(&data);
 	 if (read_input(ac, av, &data) == -1)
 		 exit(1);
+	 print_map(&data);
 //	 init_mlx(&data);
 //	 init_data(&data);
 //	 draw_background(&data);

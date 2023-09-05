@@ -24,7 +24,7 @@ int	check_F_fill(t_data *data, char **tab)
 		return (1);
 	if (data->texture.no_dup.floor == 1)
 	{
-		printf("ERROR : Doublon dans floor color\n");
+		printf("ERROR : Doublon dans C\n");
 		return (-1);
 	}
 	data->texture.no_dup.floor = 1;
@@ -72,7 +72,7 @@ int	check_C_fill(t_data *data, char **tab)
 		return (1);
 	if (data->texture.no_dup.ceilling == 1)
 	{
-		printf("ERROR : Doublon dans ceilling color\n");
+		printf("ERROR : Doublon dans Fr\n");
 		return (-1);
 	}
 	data->texture.no_dup.ceilling = 1;

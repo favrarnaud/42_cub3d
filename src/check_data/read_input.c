@@ -64,9 +64,6 @@ int	ft_check_av(int ac, char **av)
 	return (fd);
 }
 
-
-
-//  set 3 tabs (1. chemin des textures, 2.couleurs du floor, 3. map)
 int	set_tabs(t_data *data, int fd)
 {
 	char	*str;
@@ -75,7 +72,6 @@ int	set_tabs(t_data *data, int fd)
 	str = get_next_line(fd);
 	while (str)
 	{
-		//printf("test --> %s\n", str);
 		if (empty_line(str) && data->texture.no_dup.south != 63)
 		{
 			tab = ft_split(str, ' ');
@@ -95,8 +91,11 @@ int	set_tabs(t_data *data, int fd)
 		str = get_next_line(fd);
 	}
 	if (check_dbstruct(data) != 6)
-		print_error("Parametre premap incorrect");
-	return (check_map(data, fd));
+		return (print_error("Parametre pre map incorrect"));
+	str = get_next_line(fd);
+	if (str && str[0] != ' ' && str[0] != '1' && str[0] != '\n')
+		return (printf("doublon dans %c%c\n", str[0], str[1]));
+	return (check_map(data, fd, str));
 }
 
 // check av and init map

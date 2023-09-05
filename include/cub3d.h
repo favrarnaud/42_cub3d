@@ -127,7 +127,7 @@ int	check_WE_fill(t_data *data, char **tab);
 int	check_EA_fill(t_data *data, char **tab);
 
 // check_map.c
-int	check_map(t_data *data, int fd);
+int		check_map(t_data *data, int fd, char *fstr);
 
 // map_utils.c
 int	check_char_dup(t_data *data, int *dup);
@@ -151,7 +151,6 @@ void		init_data(t_data *data);
 //map.c
 void	gen_map(t_data *data);
 void	clear_map(t_data *data);
-void	print_map(t_data *data);
 
 // ---> UTILS
 //ray.c
@@ -159,6 +158,8 @@ double	degree_to_radians(float degree);
 t_point	create_point(double x, double y);
 //tab.c
 void	print_map(t_data *data);
+void	clear_map_floodfill(t_data *data);
+
 
 //draw_utils.c
 int		new_color(int r, int g, int b, int a);
