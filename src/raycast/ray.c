@@ -12,63 +12,35 @@
 
 #include "cub3d.h"
 
-void	throw_ray(t_data *data, float angle, int iter)
+t_col_info set_col_info(t_data *data, float angle)
 {
-	(void)iter;
-	float rayDirX = cos(angle);
-	float rayDirY = sin(angle);
-	int mapX = (int)(data->ray.player_pos.x);
-	int mapY = (int)(data->ray.player_pos.y);
-	float deltaDistX = fabs(1 / rayDirX);
-	float deltaDistY = fabs(1 / rayDirY);
-	float sideDistX;
-	float sideDistY;
-	int stepX;
-	int stepY;
+	t_col_info col;
 
-	if (rayDirX < 0)
-	{
-		stepX = -1;
-		sideDistX = (data->ray.player_pos.x - mapX) * deltaDistX;
-	}
-	else
-	{
-		stepX = 1;
-		sideDistX = (mapX + 1.0 - data->ray.player_pos.x) * deltaDistX;
-	}
+	col.start.x = data->ray.player_pos.x;
+	col.start.y = data->ray.player_pos.y;
+	printf("player pos %f, %f\n", col.start.x, col.start.y);
 
-	if (rayDirY < 0)
-	{
-		stepY = -1;
-		sideDistY = (data->ray.player_pos.y - mapY) * deltaDistY;
-	}
-	else
-	{
-		stepY = 1;
-		sideDistY = (mapY + 1.0 - data->ray.player_pos.y) * deltaDistY;
-	}
+	col.hyp_y = (floor(col.start.x + 1) - col.start.x) / cos(degree_to_radians(angle));
+	col.hyp_x = (col.start.y - floor(col.start.y)) / sin(degree_to_radians(angle));
 
-	int hit = 0;
-	while (hit == 0)
+	if (col.hyp_x < col.hyp_y)
 	{
-		if (sideDistX < sideDistY)
-		{
-			sideDistX += deltaDistX;
-			mapX += stepX;
-			if (data->map.tab[mapX][mapY] == 1)
-				hit = 1;
-			render_line(data, iter, 10, 900, new_color(255, 0, 0, 0));
-		}
-		else
-		{
-			sideDistY += deltaDistY;
-			mapY += stepY;
-			if (data->map.tab[mapX][mapY] == 1)
-				hit = 1;
-		}
+		col.new.x = col.start.x + ((col.start.y - floor(col.start.y)) / tan(degree_to_radians(angle)));
+		col.new.y = floorf(col.start.y);
 	}
+	else if (col.hyp_x > col.hyp_y)
+	{
+		col.new.x = floorf(col.start.x + 1);
+		col.new.y = col.start.y - ((floor(col.start.x + 1) - col.start.x) * tan(degree_to_radians(angle)));
+	}
+	printf("test ---> x : %f, y : %f", col.new.x, col.new.y);
+	return (col);
 }
 
+t_col_info	throw_ray(t_data *data, float angle)
+{
+	return (get_ne_ray(data, angle));
+}
 
 
 void ray_casting(t_data *data)
@@ -76,6 +48,7 @@ void ray_casting(t_data *data)
 	float	expand;
 	float	angle;
 	float	angle_end;
+	t_col_info vachier;
 	int		i;
 
 	angle = data->ray.angle - data->ray.fov / 2;
@@ -84,7 +57,9 @@ void ray_casting(t_data *data)
 	i = 0;
 	while (angle <= angle_end)
 	{
-		throw_ray(data, angle, i);
+		vachier = throw_ray(data, angle);
+		printf("iter n : %d, angle : %f, dist : %f\n", i, angle, vachier.dist);
+		render_line(data, i,  50 * vachier.dist, 1080, new_color(255, 0, 0, 0));
 		angle += expand;
 		i++;
 	}

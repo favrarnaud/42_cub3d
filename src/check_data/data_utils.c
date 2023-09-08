@@ -40,7 +40,6 @@ void	free_tab(char **tab)
 	}
 	free(tab);
 }
-//free le malloc de char **
 
 
 int	tab_size(char **tab)

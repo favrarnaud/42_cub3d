@@ -23,8 +23,7 @@ SRCS			:=	main.c \
 					mlx/handler.c \
 					mlx/draw.c \
 					data/init_data.c\
-					debug/map.c \
-					utils/ray.c \
+					utils/ray_utils.c \
 					utils/tab.c \
 					utils/draw_utils.c \
 					utils/malloc.c \
@@ -37,7 +36,8 @@ SRCS			:=	main.c \
 					check_data/check_texture.c \
 					check_data/check_map.c \
 					check_data/map_utils.c \
-					check_data/free_data.c 
+					check_data/free_data.c \
+					quartiles/ne.c \
 
 SRCS			:=	$(SRCS:%=$(SRC_DIR)/%)
 

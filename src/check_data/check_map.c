@@ -14,10 +14,7 @@
 
 int	verify_map(t_data *data)
 {
-	int dup;
-
-	dup = 0;
-	if (check_char_dup(data, &dup) == -1)
+	if (check_char_dup(data) == -1)
 		return (-1);
 	if (check_closed_map(data) == -1)
 		return (-1);

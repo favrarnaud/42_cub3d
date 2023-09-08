@@ -37,14 +37,14 @@ int move_key(int keycode, void *param) {
 	{
 		data->ray.angle -= 3;
 		if (data->ray.angle < 0)
-			data->ray.angle += 360;
+			data->ray.angle = 360;
 	}
 
 	if (keycode == KEY_RIGHT)
 	{
 		data->ray.angle += 3;
 		if (data->ray.angle >= 360)
-			data->ray.angle -= 360;
+			data->ray.angle = 0;
 	}
 
 	float dx = moveSpeed * sin(degree_to_radians(data->ray.angle));

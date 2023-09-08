@@ -14,18 +14,25 @@
 
  int	main(int ac, char **av)
  {
+	 float i = 45;
+	 (void)ac;
+	 (void)av;
  	t_data	data;
+	 (void)data;
 
 	 init_data(&data);
 	 if (read_input(ac, av, &data) == -1)
 		 exit(1);
-	 print_map(&data);
+	 while (i < 90)
+	 {
+		 printf("iter : %f\n", i);
+		 get_ne_ray(&data, i);
+		 i++;
+	 }
 //	 init_mlx(&data);
-//	 init_data(&data);
 //	 draw_background(&data);
 //	 ray_casting(&data);
 //	 update_img(&data);
 //	 mlx_loop(data.mlx.ptr);
-//	 clear_map(&data);
 	 return (0);
  }

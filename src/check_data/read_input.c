@@ -75,6 +75,8 @@ int	set_tabs(t_data *data, int fd)
 		if (empty_line(str) && data->texture.no_dup.south != 63)
 		{
 			tab = ft_split(str, ' ');
+			if (Check_line_start(tab) == -1)
+				return (print_error("Ligne invalide dans la map"));
 			replace_last_char(tab);
 			if (tab_size(tab) != 2)
 			{

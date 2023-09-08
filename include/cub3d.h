@@ -30,6 +30,21 @@ typedef enum
 	NONE
 }	wall_face;
 
+typedef struct s_point {
+	float x;
+	float y;
+}	t_point;
+
+typedef struct s_col_infos
+{
+	float hyp_x;
+	float hyp_y;
+	t_point start;
+	t_point new;
+	wall_face face;
+	float dist;
+} t_col_info;
+
 typedef struct s_nodb
 {
 	int north;
@@ -49,11 +64,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_point {
-	double x;
-	double y;
-}	t_point;
-
 typedef struct s_ray {
 	t_point	player_pos;
 	float	fov;
@@ -67,7 +77,6 @@ typedef struct s_map {
 	int  **tab;
 	int  h_map;
 	int  l_map;
-	int	map_size;
 }	t_map;
 
 typedef struct s_mlx {
@@ -130,8 +139,9 @@ int	check_EA_fill(t_data *data, char **tab);
 int		check_map(t_data *data, int fd, char *fstr);
 
 // map_utils.c
-int	check_char_dup(t_data *data, int *dup);
+int	check_char_dup(t_data *data);
 int	check_closed_map(t_data *data);
+int	Check_line_start(char **tab);
 
 // free_data.c
 void	free_int_tab(int **tab);
@@ -147,18 +157,12 @@ int	print_error(char *msg);
 //init_data.c
 void		init_data(t_data *data);
 
-// ---> DEBUG
-//map.c
-void	gen_map(t_data *data);
-void	clear_map(t_data *data);
-
 // ---> UTILS
-//ray.c
+//ray_utils.c
 double	degree_to_radians(float degree);
-t_point	create_point(double x, double y);
+
 //tab.c
 void	print_map(t_data *data);
-void	clear_map_floodfill(t_data *data);
 
 
 //draw_utils.c
@@ -171,5 +175,9 @@ void *pro_malloc(size_t size);
 // ---> RAYCAST
 //ray.c
 void	ray_casting(t_data *data);
+
+// ---> QUARTILES
+//ne.c
+t_col_info get_ne_ray(t_data *data, float angle);
 
 #endif
