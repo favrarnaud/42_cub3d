@@ -14,41 +14,41 @@
 
 int	check_char_dup(t_data *data)
 {
-	int	l;
-	int h;
+	int	x;
+	int y;
 	int dup;
 
-	h = 0;
+	y = 0;
 	dup = 0;
-	while (h < data->map.h_map)
+	while (y < data->map.height)
 	{
-		l = 0;
-		while (l < data->map.l_map)
+		x = 0;
+		while (x < data->map.width)
 		{
-			if (data->map.map[h][l] == 'x' || data->map.map[h][l] == '0' || \
-				data->map.map[h][l] == '1')
-				l++;
-			else if ((data->map.map[h][l] == 'N' || data->map.map[h][l] == 'S' || \
-			data->map.map[h][l] == 'E' || data->map.map[h][l] == 'W') && dup == 0)
+			if (data->map.map[y][x] == 'x' || data->map.map[y][x] == '0' || \
+				data->map.map[y][x] == '1')
+				x++;
+			else if ((data->map.map[y][x] == 'N' || data->map.map[y][x] == 'S' || \
+			data->map.map[y][x] == 'E' || data->map.map[y][x] == 'W') && dup == 0)
 			{
-				data->ray.player_pos.x = (h + 0.5);
-				data->ray.player_pos.y = (l + 0.5);
-				if (data->map.map[h][l] == 'N')
+				data->ray.player_pos.x = (y + 0.5);
+				data->ray.player_pos.y = (x + 0.5);
+				if (data->map.map[y][x] == 'N')
 					data->ray.angle = 270;
-				else if (data->map.map[h][l] == 'S')
+				else if (data->map.map[y][x] == 'S')
 					//TODO change this value
 					data->ray.angle = 45;
-				else if (data->map.map[h][l] == 'W')
+				else if (data->map.map[y][x] == 'W')
 					data->ray.angle = 180;
-				else if (data->map.map[h][l] == 'E')
+				else if (data->map.map[y][x] == 'E')
 					data->ray.angle = 0;
 				dup = 1;
-				l++;
+				x++;
 			}
 			else
 				return (print_error("Double player detectee dans la map"));
 		}
-		h++;
+		y++;
 	}
 	if (dup == 0)
 		return (print_error("La map ne contient pas de player"));
@@ -62,7 +62,7 @@ int	flood_fill_map(t_data *data, int h, int l)
 		printf("Hole in the wall of your map\n");
 		exit(1);
 	}
-	else if (h < 0 || h >= data->map.h_map || l < 0 || l >= data->map.l_map
+	else if (h < 0 || h >= data->map.height || l < 0 || l >= data->map.width
 		|| data->map.map[h][l] == 'F'  || data->map.map[h][l] == '1')
 		return (0);
 
@@ -84,10 +84,10 @@ int	check_closed_map(t_data *data)
 	int	l;
 
 	h = 0;
-	while(h >= 0 && h < data->map.h_map)
+	while(h >= 0 && h < data->map.height)
 	{
 		l = 0;
-		while (l < data->map.l_map)
+		while (l < data->map.width)
 		{
 			if (data->map.map[h][l] == '0')
 			{
@@ -123,10 +123,10 @@ void clear_fmap(t_data *data)
 	int l;
 
 	h = 0;
-	while (h < data->map.h_map)
+	while (h < data->map.height)
 	{
 		l = 0;
-		while (l < data->map.l_map)
+		while (l < data->map.width)
 		{
 			printf("test --> %d, %d", h, l);
 			if (data->map.map[h][l] == 'F')

@@ -75,8 +75,8 @@ typedef struct s_ray {
 typedef struct s_map {
 	char **map;
 	int  **tab;
-	int  h_map;
-	int  l_map;
+	int  height;
+	int  width;
 }	t_map;
 
 typedef struct s_mlx {
@@ -179,5 +179,9 @@ void	ray_casting(t_data *data);
 // ---> QUARTILES
 //ne.c
 t_col_info get_ne_ray(t_data *data, float angle);
+
+// TODO remove this debug
+// ---TEST ---> DEBUG
+void test(t_data *data);
 
 #endif

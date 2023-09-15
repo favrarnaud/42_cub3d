@@ -19,6 +19,7 @@ INCS			:=	include \
 SRC_DIR			:=	src
 
 SRCS			:=	main.c \
+					test.c \
 					mlx/init_mlx.c \
 					mlx/handler.c \
 					mlx/draw.c \
@@ -46,7 +47,7 @@ OBJS			:=	$(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS			:=	$(OBJS:.o=.d)
 
 CC				:=	gcc
-CFLAGS			:=	-Wall -Wextra -Werror
+CFLAGS			:=
 CPPFLAGS		:=	$(addprefix -I,$(INCS)) -MMD -MP
 LDFLAGS			:=	$(addprefix -L,$(dir $(LIBS_TARGET))) 
 LDLIBS			:=	$(addprefix -l,$(LIBS))

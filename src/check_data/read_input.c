@@ -72,7 +72,7 @@ int	set_tabs(t_data *data, int fd)
 	str = get_next_line(fd);
 	while (str)
 	{
-		if (empty_line(str) && data->texture.no_dup.south != 63)
+		if (empty_line(str))
 		{
 			tab = ft_split(str, ' ');
 			if (Check_line_start(tab) == -1)
@@ -93,7 +93,7 @@ int	set_tabs(t_data *data, int fd)
 		str = get_next_line(fd);
 	}
 	if (check_dbstruct(data) != 6)
-		return (print_error("Parametre pre map incorrect"));
+		return (print_error("Parametres manquant"));
 	str = get_next_line(fd);
 	if (str && str[0] != ' ' && str[0] != '1' && str[0] != '\n')
 		return (printf("doublon dans %c%c\n", str[0], str[1]));

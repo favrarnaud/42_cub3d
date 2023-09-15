@@ -14,10 +14,10 @@
 
 void	print_map(t_data *data)
 {
-	int h;
-	int l;
+	int y;
+	int x;
 
-	h = 0;
+	y = 0;
 
 	printf("Texture nord : %s\n", data->texture.NO_path);
 	printf("Texture sud : %s\n", data->texture.SO_path);
@@ -26,18 +26,18 @@ void	print_map(t_data *data)
 	printf("couleur plafond : %d\n", data->texture.C_color);
 	printf("couleur sol: %d\n", data->texture.F_color);
 	printf("position player: x --> %f, y ---> %f\n", data->ray.player_pos.x, data->ray.player_pos.y);
-	printf("horientation player: %f\n", data->ray.angle);
+	printf("orientation player: %f\n", data->ray.angle);
 	printf("\n");
 
-	while (h < data->map.h_map)
+	while (y < data->map.height)
 	{
-		l = 0;
-		while (l < data->map.l_map)
+		x = 0;
+		while (x < data->map.width)
 		{
-			printf("%c", data->map.map[h][l]);
-			l++;
+			printf("%c", data->map.map[y][x]);
+			x++;
 		}
 		printf("\n");
-		h++;
+		y++;
 	}
 }

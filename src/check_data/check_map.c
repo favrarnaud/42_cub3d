@@ -23,41 +23,41 @@ int	verify_map(t_data *data)
 
 void	fill_tab_x(char **map, int tab_len, int len)
 {
-	int	i;
-	int j;
+	int	x;
+	int y;
 
-	i = 0;
-	while(i < tab_len + 2)
+	y = 0;
+	while(y < tab_len)
 	{
-		map[i] = pro_malloc((len + 3) * (sizeof(char)));
-		j = 0;
-		while(j < len + 2)
+		map[y] = pro_malloc((len + 1) * (sizeof(char)));
+		x = 0;
+		while(x < len)
 		{
-			map[i][j] = 'x';
-			j++;
+			map[y][x] = 'x';
+			x++;
 		}
-		map[i][j] = '\0';
-		i++;
+		map[y][x] = '\0';
+		y++;
 	}
-	map[i] = NULL;
+	map[y] = NULL;
 }
 
 void	fill_map(char **map, char **tab_tmp, int h_len)
 {
-	int	l;
-	int h;
+	int	y;
+	int x;
 
-	h = 1;
-	while (h < h_len - 1)
+	y = 1;
+	while (y < h_len - 1)
 	{
-		l = 1;
-		while (map[h][l] && tab_tmp[h-1][l-1])
+		x = 1;
+		while (map[y][x] && tab_tmp[y-1][x-1])
 		{
-			if (tab_tmp[h-1][l-1] != 'x' && tab_tmp[h-1][l-1] != ' ')
-				map[h][l] = tab_tmp[h-1][l-1];
-			l++;
+			if (tab_tmp[y-1][x-1] != 'x' && tab_tmp[y-1][x-1] != ' ')
+				map[y][x] = tab_tmp[y-1][x-1];
+			x++;
 		}
-		h++;
+		y++;
 	}
 }
 
@@ -74,7 +74,7 @@ int	longest_str(char **tab_tmp)
 			max_len = ft_strlen(tab_tmp[i+1]);
 		i++; 
 	}
-	return (max_len);
+	return ((int)max_len);
 }
 
 int		check_map(t_data *data, int fd, char *fstr)
@@ -104,10 +104,11 @@ int		check_map(t_data *data, int fd, char *fstr)
 	}
 	tab_tmp = ft_split(tmp, '\n');
 	free(tmp);
-	data->map.h_map = tab_size(tab_tmp) + 2;
-	data->map.l_map = longest_str(tab_tmp) + 2;
-	data->map.map = pro_malloc((data->map.h_map + 1) * (sizeof(char *)));
-	fill_tab_x(data->map.map, data->map.h_map - 2, data->map.l_map - 2);
-	fill_map(data->map.map, tab_tmp, data->map.h_map);
+
+	data->map.height = tab_size(tab_tmp) + 2;
+	data->map.width = longest_str(tab_tmp) + 2;
+	data->map.map = pro_malloc((data->map.height + 1) * (sizeof(char *)));
+	fill_tab_x(data->map.map, data->map.height, data->map.width);
+	fill_map(data->map.map, tab_tmp, data->map.height);
 	return (verify_map(data));
 }

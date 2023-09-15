@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ne.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afavre <afavre@student.42lausanne>         +#+  +:+       +#+        */
+/*   By: afavre <afavre@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:32:25 by afavre            #+#    #+#             */
 /*   Updated: 2023/09/07 15:32:28 by afavre           ###   ########.fr       */
@@ -14,19 +14,18 @@
 
 int get_ne_next_point(t_data *data, t_col_info *col, float angle)
 {
-	printf("sin --> %f\n", sin(degree_to_radians(angle)));
-	printf("cos --> %f\n", cos(degree_to_radians(angle)));
-	printf("tan --> %f\n", tan(degree_to_radians(angle)));
 	col->hyp_y = (floorf(col->start.x + 1) - col->start.x) / cos(degree_to_radians(angle));
 	col->hyp_x = (col->start.y - floorf(col->start.y)) / sin(degree_to_radians(angle));
 
 	if (col->hyp_x < col->hyp_y && col->hyp_x != 0)
 	{
-		col->new.x = (float)(col->start.x + ((col->start.y - floorf(col->start.y)) / tan(degree_to_radians(angle))));
+		col->new.x = (col->start.x + ((col->start.y - floorf(col->start.y)) / tan(degree_to_radians(angle))));
 		col->new.y = (floorf(col->start.y));
-		col->face = SOUTH;
-		if (data->map.map[(int)col->new.x][(int)col->new.y - 1] == 'F')
+		if (data->map.map[(int)col->new.x][(int)col->new.y] == 'F')
+		{
+			col->face = WEST;
 			return (0);
+		}
 		else
 			return (1);
 	}
@@ -34,9 +33,11 @@ int get_ne_next_point(t_data *data, t_col_info *col, float angle)
 	{
 		col->new.x = (floorf(col->start.x + 1));
 		col->new.y = (col->start.y - ((floor(col->start.x + 1) - col->start.x) * tan(degree_to_radians(angle))));
-		col->face = WEST;
-		if (data->map.map[(int)col->new.x - 1][(int)col->new.y] == 'F')
+		if (data->map.map[(int)col->new.x][(int)col->new.y] == 'F')
+		{
+			col->face = SOUTH;
 			return (0);
+		}
 		else
 			return (1);
 	}
@@ -50,17 +51,18 @@ float get_hypo(float adj, float opp)
 t_col_info get_ne_ray(t_data *data, float angle)
 {
 	t_col_info col;
+	int i = 0;
 
 	col.dist = 0;
 	col.start.x = data->ray.player_pos.x;
 	col.start.y = data->ray.player_pos.y;
-	while (1)
+	while (get_ne_next_point(data, &col, angle) != 1)
 	{
-		if (get_ne_next_point(data, &col, angle) == 1)
-			break;
 		col.start.x = col.new.x;
 		col.start.y = col.new.y;
+		i++;
 	}
-	printf("test x : %f, y : %f\n", col.start.x, col.start.y);
+	col.dist = get_hypo((col.start.x - data->ray.player_pos.x), (col.start.y - data->ray.player_pos.y));
+	printf("start pos = x : %f, y : %f, angle : %f, x : %f, y : %f, avec %d iteration pour une distance de %f avec une facade %u\n",data->ray.player_pos.x, data->ray.player_pos.y,  angle, col.start.x, col.start.y, i, col.dist, col.face);
 	return (col);
 }
