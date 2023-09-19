@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afavre <afavre@student.42lausanne>         +#+  +:+       +#+        */
+/*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 16:58:53 by afavre            #+#    #+#             */
-/*   Updated: 2023/09/13 16:58:55 by afavre           ###   ########.fr       */
+/*   Updated: 2023/09/19 14:51:27 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void test(t_data *data)
 {
 	int x;
+	int	h;
+	int	w;
 	double posX;
 	double posY;
 	double dirX;
@@ -37,20 +39,20 @@ void test(t_data *data)
 	int side;
 
 	x = 0;
-	posX = 4;
-	posY = 4;
+	h = data->mlx.screen_height;
+	w = data->mlx.screen_width;
+	posX = 3;
+	posY = 3;
 	dirX = 1;
 	dirY = 0;
 	planeX = 0;
-	planeY = 0;
+	planeY = 0.66;
 	mapX = (int)posY;
 	mapY = (int)posX;
 	hit = 0;
 
 
-	while (1)
-	{
-		while (x < 1920)
+		while (x < w)
 		{
 			cameraX = 2 * x / (double)data->mlx.screen_width - 1;
 			rayDirX = dirY + planeX * cameraX;
@@ -102,11 +104,22 @@ void test(t_data *data)
 				{
 					hit = 1;
 				}
+			}
 				if (side == 0) perpWallDist = (sideDistX - deltaDistX);
 				else perpWallDist = (sideDistY - deltaDistY);
-			}
-			printf("test %d --> %f\n", x, perpWallDist);
-		}
-		break;
+			// printf("test %d --> %f\n", x, perpWallDist);
+			int lineheight = (int)(h / perpWallDist);
+			int drawstart = -(lineheight) / 2 + h/2;
+			if ( drawstart < 0 )
+				drawstart = 0;
+			int drawend = lineheight / 2 + h/2;
+			if (drawend >= h)
+				drawend = h - 1;
+			int color;
+				color = 0x0000FF;
+			if (side == 1)
+				color = color /2;
+			render_line(data, x, drawstart, drawend, color);
+				
 	}
 }

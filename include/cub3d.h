@@ -6,7 +6,7 @@
 /*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:03:07 by afavre            #+#    #+#             */
-/*   Updated: 2023/08/29 16:26:29 by bberger          ###   ########.fr       */
+/*   Updated: 2023/09/19 14:08:41 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ void	print_map(t_data *data);
 
 //draw_utils.c
 int		new_color(int r, int g, int b, int a);
+void	add_pixel(t_data *data, t_img *img, int x, int y, int color);
 void	render_rect(t_data *data, int x, int y, int height, int width, int color);
 void	render_line(t_data *data, int col, int start, int end, int color);
 // malloc.c

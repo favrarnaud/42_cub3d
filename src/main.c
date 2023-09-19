@@ -6,7 +6,7 @@
 /*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:53:58 by afavre            #+#    #+#             */
-/*   Updated: 2023/08/25 11:56:55 by bberger          ###   ########.fr       */
+/*   Updated: 2023/09/19 14:48:53 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 	 init_data(&data);
 	 if (read_input(ac, av, &data) == -1)
 		 exit(1);
+	 init_mlx(&data);
+	draw_background(&data);
 	 test(&data);
-//	 init_mlx(&data);
-//	 draw_background(&data);
-//	 update_img(&data);
-//	 mlx_loop(data.mlx.ptr);
+	// update_img(&data);
+	mlx_put_image_to_window(data.mlx.ptr, data.mlx.win, data.img.mlx_img, 0, 0);
+	 mlx_loop(data.mlx.ptr);
 	 return (0);
  }
