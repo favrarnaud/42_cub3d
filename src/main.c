@@ -23,10 +23,10 @@
 	 if (read_input(ac, av, &data) == -1)
 		 exit(1);
 	 init_mlx(&data);
-	draw_background(&data);
+	 draw_background(&data);
 	 test(&data);
-	// update_img(&data);
-	mlx_put_image_to_window(data.mlx.ptr, data.mlx.win, data.img.mlx_img, 0, 0);
+	 // update_img(&data);
+	 mlx_put_image_to_window(data.mlx.ptr, data.mlx.win, data.img.mlx_img, 0, 0);
 	 mlx_loop(data.mlx.ptr);
 	 return (0);
  }

@@ -63,6 +63,6 @@ t_col_info get_ne_ray(t_data *data, float angle)
 		i++;
 	}
 	col.dist = get_hypo((col.start.x - data->ray.player_pos.x), (col.start.y - data->ray.player_pos.y));
-	printf("start pos = x : %f, y : %f, angle : %f, x : %f, y : %f, avec %d iteration pour une distance de %f avec une facade %u\n",data->ray.player_pos.x, data->ray.player_pos.y,  angle, col.start.x, col.start.y, i, col.dist, col.face);
+	//printf("start pos = x : %f, y : %f, angle : %f, x : %f, y : %f, avec %d iteration pour une distance de %f avec une facade %u\n",data->ray.player_pos.x, data->ray.player_pos.y,  angle, col.start.x, col.start.y, i, col.dist, col.face);
 	return (col);
 }
