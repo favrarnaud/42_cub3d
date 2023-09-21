@@ -87,6 +87,7 @@ typedef struct s_cam
 	double planeX;
 	double planeY;
 	double r_sp;
+	double m_sp;
 }	t_cam;
 
 typedef struct s_data {

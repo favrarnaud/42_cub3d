@@ -31,8 +31,8 @@ int	check_char_dup(t_data *data)
 			else if ((data->map.map[y][x] == 'N' || data->map.map[y][x] == 'S' || \
 			data->map.map[y][x] == 'E' || data->map.map[y][x] == 'W') && dup == 0)
 			{
-				data->player.posX = (y + 0.5);
-				data->player.posY = (x + 0.5);
+				data->player.posX = (y + 0.51);
+				data->player.posY = (x + 0.51);
 //				if (data->map.map[y][x] == 'N')
 //					data->ray.angle = 270;
 //				else if (data->map.map[y][x] == 'S')

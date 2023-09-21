@@ -45,6 +45,34 @@ int move_key(int keycode, void *param) {
 		data->cam.planeX = data->cam.planeX * cos(-data->cam.r_sp) - data->cam.planeY * sin(-data->cam.r_sp);
 		data->cam.planeY = old_planeX * sin(-data->cam.r_sp) + data->cam.planeY * cos(-data->cam.r_sp);
 	}
+	if (keycode == KEY_W)
+	{
+		if(data->map.map[(int)(data->player.posX + data->cam.dirX * data->cam.m_sp)][(int)(data->player.posY)] == 'F')
+			data->player.posX += data->cam.dirX * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.posX)][(int)(data->player.posY + data->cam.dirY * data->cam.m_sp)] == 'F')
+			data->player.posY += data->cam.dirY * data->cam.m_sp;
+	}
+	if (keycode == KEY_A)
+	{
+		if(data->map.map[(int)(data->player.posX - data->cam.dirY * data->cam.m_sp)][(int)(data->player.posY)] == 'F')
+			data->player.posX -= data->cam.dirY * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.posX)][(int)(data->player.posY + data->cam.dirX * data->cam.m_sp)] == 'F')
+			data->player.posY += data->cam.dirX * data->cam.m_sp;
+	}
+	if (keycode == KEY_S)
+	{
+		if(data->map.map[(int)(data->player.posX - data->cam.dirX * data->cam.m_sp)][(int)(data->player.posY)] == 'F')
+			data->player.posX -= data->cam.dirX * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.posX)][(int)(data->player.posY - data->cam.dirY * data->cam.m_sp)] == 'F')
+			data->player.posY -= data->cam.dirY * data->cam.m_sp;
+	}
+	if (keycode == KEY_D)
+	{
+		if(data->map.map[(int)(data->player.posX + data->cam.dirY * data->cam.m_sp)][(int)(data->player.posY)] == 'F')
+			data->player.posX += data->cam.dirY * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.posX)][(int)(data->player.posY - data->cam.dirX * data->cam.m_sp)] == 'F')
+			data->player.posY -= data->cam.dirX * data->cam.m_sp;
+	}
 	update_img(data);
 	return (0);
 }
