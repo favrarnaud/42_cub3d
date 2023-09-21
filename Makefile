@@ -19,13 +19,14 @@ INCS			:=	include \
 SRC_DIR			:=	src
 
 SRCS			:=	main.c \
-					test.c \
+					raycast/main_raycast.c \
+					raycast/raycast_utils.c \
 					mlx/init_mlx.c \
 					mlx/handler.c \
+					mlx/key_movement.c \
+					mlx/key_rotation.c \
 					mlx/draw.c \
 					data/init_data.c\
-					utils/ray_utils.c \
-					utils/tab.c \
 					utils/draw_utils.c \
 					utils/malloc.c \
 					utils/read_utils.c \

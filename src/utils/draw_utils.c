@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-int		new_color(int r, int g, int b, int a)
+int	new_color(int r, int g, int b, int a)
 {
-	int color;
+	int	color;
 
 	color = (a << 24) + (r << 16) + (g << 8) + b;
 	return (color);
@@ -22,11 +22,11 @@ int		new_color(int r, int g, int b, int a)
 
 void	add_pixel(t_data *data, int x, int y, int color)
 {
-	char    *pixel;
+	char	*pixel;
 
 	if ((x >= data->mlx.screen_width || x <= 0 || \
 	y >= data->mlx.screen_height || y <= 0))
-		return;
+		return ;
 	pixel = data->img.addr + (y * data->img.line_len + x * (data->img.bpp / 8));
 	*(int *)pixel = color;
 }
@@ -34,7 +34,7 @@ void	add_pixel(t_data *data, int x, int y, int color)
 void	render_rect(t_data *data, t_point t, t_rect r, int color)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = (int)t.y;
 	while (i < (t.y + r.height))
@@ -51,7 +51,7 @@ void	render_rect(t_data *data, t_point t, t_rect r, int color)
 
 void	render_line(t_data *data, int col, t_point t, int color)
 {
-	int i;
+	int	i;
 
 	i = (int)t.x;
 	while (i < t.y)
@@ -60,5 +60,3 @@ void	render_line(t_data *data, int col, t_point t, int color)
 		i++;
 	}
 }
-
-

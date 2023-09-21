@@ -12,10 +12,6 @@
 
 #include "cub3d.h"
 
-//TODO remove manual map generation and fixed player position after parsing completion.
-
-// N (270º), S (90º), W (180º), E (0º)
-
 void	init_data(t_data *data)
 {
 	data->texture.no_dup.north = 0;
@@ -24,7 +20,6 @@ void	init_data(t_data *data)
 	data->texture.no_dup.west = 0;
 	data->texture.no_dup.floor = 0;
 	data->texture.no_dup.ceilling = 0;
-
 	data->cam.dir_x = -1;
 	data->cam.dir_y = 0;
 	data->cam.plane_x = 0;

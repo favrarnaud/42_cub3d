@@ -14,7 +14,7 @@
 
 int	divided_line(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] == ' ')
@@ -25,7 +25,7 @@ int	divided_line(char *str)
 	{
 		i++;
 	}
-	while (str[i] !='\0')
+	while (str[i] != '\0')
 	{
 		if (str[i] != ' ' && str[i] != '\0')
 		{

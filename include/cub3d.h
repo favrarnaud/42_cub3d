@@ -109,6 +109,28 @@ typedef struct s_cam
 	double		m_sp;
 }	t_cam;
 
+typedef struct s_raycast
+{
+	int x;
+	int	h;
+	int	w;
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+	int mapX;
+	int mapY;
+	double sideDistX;
+	double sideDistY;
+	double deltaDistX;
+	double deltaDistY;
+	double perpWallDist;
+	int stepX;
+	int stepY;
+	int hit;
+	int side;
+	t_point t;
+}	t_raycast;
+
 typedef struct s_data {
 	t_mlx		mlx;
 	t_map		map;
@@ -116,14 +138,28 @@ typedef struct s_data {
 	t_player	player;
 	t_cam		cam;
 	t_texture	texture;
+	t_raycast	raycast;
 	t_trash		trash;
 }	t_data;
 
 // ---> MLX
 //init_mlx.c
 void	init_mlx(t_data *data);
+
 //handler.c
 void	init_event(t_data *data);
+
+// key_movement.c
+
+void	devant(t_data *data);
+void	derriere(t_data *data);
+void	moonwalk_gauche(t_data *data);
+void	moonwalk_droit(t_data *data);
+
+//key_rotation.c
+void	la_gauche(t_data *data);
+void	la_droite(t_data *data);
+
 //draw.c
 void	draw_background(t_data *data);
 void	update_img(t_data *data);
@@ -182,8 +218,6 @@ int		print_error(char *msg);
 void	init_data(t_data *data);
 
 // ---> UTILS
-//ray_utils.c
-double	degree_to_radians(float degree);
 
 //tab.c
 void	print_map(t_data *data);
@@ -197,8 +231,11 @@ void	render_line(t_data *data, int col, t_point t, int color);
 // malloc.c
 void	*pro_malloc(size_t size);
 
-// TODO remove this debug
-// ---TEST ---> DEBUG
-void	test(t_data *data);
+// --> RAYCAST
+//main_raycast.c
+void	raycast(t_data *data);
+
+//raycast_utils.c
+void	phase1(t_data *data);
 
 #endif

@@ -14,8 +14,8 @@
 
 void	*pro_malloc(size_t size)
 {
-	void *ptr;
-	
+	void	*ptr;
+
 	ptr = malloc(size);
 	if (!ptr)
 	{
@@ -23,5 +23,5 @@ void	*pro_malloc(size_t size)
 		exit(1);
 	}
 	ft_bzero(ptr, size);
-	return (ptr);		
+	return (ptr);
 }
