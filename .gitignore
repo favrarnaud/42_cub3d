@@ -1,6 +1,7 @@
 .idea/
 *.o
 *.a
+*.txt
 cub3d
 .build
 .vscode

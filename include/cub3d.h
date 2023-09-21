@@ -30,20 +30,11 @@ typedef enum
 	NONE
 }	wall_face;
 
-typedef struct s_point {
-	float x;
-	float y;
-}	t_point;
-
-typedef struct s_col_infos
+typedef struct s_player
 {
-	float hyp_x;
-	float hyp_y;
-	t_point start;
-	t_point new;
-	wall_face face;
-	float dist;
-} t_col_info;
+	double posX;
+	double posY;
+}	t_player;
 
 typedef struct s_nodb
 {
@@ -63,14 +54,6 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
-
-typedef struct s_ray {
-	t_point	player_pos;
-	float	fov;
-	float	angle;
-	int		half_height;
-
-}	t_ray;
 
 typedef struct s_map {
 	char **map;
@@ -95,16 +78,24 @@ typedef struct s_texture
 	char	*EA_path;
 	int		F_color;
 	int		C_color;
-	
 }	t_texture;
+
+typedef struct s_cam
+{
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+	double rot_speed;
+}	t_cam;
 
 typedef struct s_data {
 	t_mlx 		mlx;
 	t_map 		map;
-	t_ray 		ray;
 	t_img 		img;
+	t_player	player;
+	t_cam		cam;
 	t_texture	texture;
-	
 }	t_data;
 
 // ---> MLX
@@ -170,16 +161,9 @@ int		new_color(int r, int g, int b, int a);
 void	add_pixel(t_data *data, t_img *img, int x, int y, int color);
 void	render_rect(t_data *data, int x, int y, int height, int width, int color);
 void	render_line(t_data *data, int col, int start, int end, int color);
+
 // malloc.c
 void *pro_malloc(size_t size);
-
-// ---> RAYCAST
-//ray.c
-void	ray_casting(t_data *data);
-
-// ---> QUARTILES
-//ne.c
-t_col_info get_ne_ray(t_data *data, float angle);
 
 // TODO remove this debug
 // ---TEST ---> DEBUG

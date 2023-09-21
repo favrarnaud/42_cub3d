@@ -16,15 +16,8 @@
 
 // N (270º), S (90º), W (180º), E (0º)
 
-void	init_ray(t_data *data)
-{
-	data->ray.fov = 60;
-	data->ray.half_height = data->mlx.screen_height / 2;
-}
-
 void	init_data(t_data *data)
 {
-	init_ray(data);
 	data->texture.no_dup.north = 0;
 	data->texture.no_dup.south = 0;
 	data->texture.no_dup.east = 0;

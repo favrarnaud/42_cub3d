@@ -20,7 +20,7 @@
 	 (void)data;
 
 	 init_data(&data);
-	 if (read_input(ac, av, &data) == -1)
+	 if (read_input(ac, av, &data) <= -1)
 		 exit(1);
 	 init_mlx(&data);
 	 draw_background(&data);

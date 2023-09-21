@@ -17,12 +17,6 @@ void test(t_data *data)
 	int x;
 	int	h;
 	int	w;
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
 	double cameraX;
 	double rayDirX;
 	double rayDirY;
@@ -41,20 +35,18 @@ void test(t_data *data)
 	x = 0;
 	h = data->mlx.screen_height;
 	w = data->mlx.screen_width;
-	posX = 3.5;
-	posY = 5.5;
-	dirX = -1;
-	dirY = 0;
-	planeX = 0;
-	planeY = 5;
+	data->cam.dirX = -1;
+	data->cam.dirY = 0;
+	data->cam.planeX = 0;
+	data->cam.planeY = 0.66;
 
 	while (x < w)
 	{
 		cameraX = 2 * x / (double)data->mlx.screen_width - 1;
-		rayDirX = dirX + planeX * cameraX;
-		rayDirY = dirY + planeY * cameraX;
-		mapX = (int)posX;
-		mapY = (int)posY;
+		rayDirX = data->cam.dirX + data->cam.planeX * cameraX;
+		rayDirY = data->cam.dirY + data->cam.planeY * cameraX;
+		mapX = (int)data->player.posX;
+		mapY = (int)data->player.posY;
 		x++;
 
 		if (rayDirX == 0)
@@ -69,22 +61,22 @@ void test(t_data *data)
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (posX - mapX) * deltaDistX;
+			sideDistX = (data->player.posX - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+			sideDistX = (mapX + 1.0 - data->player.posX) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (posY - mapY) * deltaDistY;
+			sideDistY = (data->player.posY - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+			sideDistY = (mapY + 1.0 - data->player.posY) * deltaDistY;
 		}
 		hit = 0;
 		while (hit == 0) {
@@ -98,11 +90,12 @@ void test(t_data *data)
 				side = 1;
 			}
 			printf("data ---> x = %d, y = %d -----> %c\n", mapX, mapY, data->map.map[mapX][mapY]);
-			if (data->map.map[mapX][mapY] == '1' || data->map.map[mapX][mapY] == 'x')
+			if (data->map.map[mapX][mapY] == '1')
 			{
 				hit = 1;
 			}
 		}
+			printf("side ---> %d\n", side);
 			if (side == 0)
 				perpWallDist = (sideDistX - deltaDistX);
 			else

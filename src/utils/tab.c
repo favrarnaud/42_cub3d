@@ -25,8 +25,7 @@ void	print_map(t_data *data)
 	printf("Texture west : %s\n", data->texture.WE_path);
 	printf("couleur plafond : %d\n", data->texture.C_color);
 	printf("couleur sol: %d\n", data->texture.F_color);
-	printf("position player: x --> %f, y ---> %f\n", data->ray.player_pos.x, data->ray.player_pos.y);
-	printf("orientation player: %f\n", data->ray.angle);
+	printf("position player: x --> %f, y ---> %f\n", data->player.posX, data->player.posY);
 	printf("\n");
 
 	while (y < data->map.height)

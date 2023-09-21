@@ -15,7 +15,9 @@
 
 int	key_handler(int key, void *param)
 {
-	(void)param;
+	t_data *data;
+
+	data = param;
 	if (key == KEY_ESC)
 		exit(0);
 	return (0);
@@ -29,49 +31,13 @@ int	close_game(t_data *data)
 
 int move_key(int keycode, void *param) {
 	t_data *data;
-	float moveSpeed = 0.1f;
-
 	data = param;
 
 	if (keycode == KEY_LEFT)
 	{
-		data->ray.angle -= 3;
-		if (data->ray.angle < 0)
-			data->ray.angle = 360;
+		printf("ducon\n");
 	}
-
-	if (keycode == KEY_RIGHT)
-	{
-		data->ray.angle += 3;
-		if (data->ray.angle >= 360)
-			data->ray.angle = 0;
-	}
-
-	float dx = moveSpeed * sin(degree_to_radians(data->ray.angle));
-	float dy = moveSpeed * cos(degree_to_radians(data->ray.angle));
-
-	if (keycode == KEY_A)
-	{
-		data->ray.player_pos.x -= dy;
-		data->ray.player_pos.y += dx;
-	}
-	if (keycode == KEY_S)
-	{
-		data->ray.player_pos.x -= dx;
-		data->ray.player_pos.y -= dy;
-	}
-	if (keycode == KEY_D)
-	{
-		data->ray.player_pos.x += dy;
-		data->ray.player_pos.y -= dx;
-	}
-	if (keycode == KEY_W)
-	{
-		data->ray.player_pos.x += dx;
-		data->ray.player_pos.y += dy;
-	}
-	update_img(data);
-	return (0);
+	return (-2147483647);
 }
 
 void	init_event(t_data *data)

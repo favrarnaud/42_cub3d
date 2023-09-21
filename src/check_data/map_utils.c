@@ -31,17 +31,17 @@ int	check_char_dup(t_data *data)
 			else if ((data->map.map[y][x] == 'N' || data->map.map[y][x] == 'S' || \
 			data->map.map[y][x] == 'E' || data->map.map[y][x] == 'W') && dup == 0)
 			{
-				data->ray.player_pos.x = (y + 0.5);
-				data->ray.player_pos.y = (x + 0.5);
-				if (data->map.map[y][x] == 'N')
-					data->ray.angle = 270;
-				else if (data->map.map[y][x] == 'S')
-					//TODO change this value
-					data->ray.angle = 45;
-				else if (data->map.map[y][x] == 'W')
-					data->ray.angle = 180;
-				else if (data->map.map[y][x] == 'E')
-					data->ray.angle = 0;
+				data->player.posX = (y + 0.5);
+				data->player.posY = (x + 0.5);
+//				if (data->map.map[y][x] == 'N')
+//					data->ray.angle = 270;
+//				else if (data->map.map[y][x] == 'S')
+//					//TODO change this value
+//					data->ray.angle = 45;
+//				else if (data->map.map[y][x] == 'W')
+//					data->ray.angle = 180;
+//				else if (data->map.map[y][x] == 'E')
+//					data->ray.angle = 0;
 				dup = 1;
 				x++;
 			}

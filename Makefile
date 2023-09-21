@@ -30,7 +30,6 @@ SRCS			:=	main.c \
 					utils/malloc.c \
 					utils/read_utils.c \
 					utils/error.c \
-					raycast/ray.c \
 					check_data/read_input.c \
 					check_data/fill_data.c \
 					check_data/data_utils.c \
@@ -38,7 +37,6 @@ SRCS			:=	main.c \
 					check_data/check_map.c \
 					check_data/map_utils.c \
 					check_data/free_data.c \
-					quartiles/ne.c \
 
 SRCS			:=	$(SRCS:%=$(SRC_DIR)/%)
 
