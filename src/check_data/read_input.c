@@ -12,11 +12,10 @@
 
 #include "cub3d.h"
 
-// replace \n at the end of each string of the tab by \0
-char **replace_last_char(char **tab)
+char	**replace_last_char(char **tab)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (tab[i])
@@ -33,7 +32,6 @@ char **replace_last_char(char **tab)
 	return (tab);
 }
 
-// check if file is a .cub file
 int	check_cub_file(char *str)
 {
 	if (ft_strlen(str) < 5)
@@ -60,7 +58,7 @@ int	ft_check_av(int ac, char **av)
 	}
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-	printf("File could not be openned!");
+		printf("File could not be openned!");
 	return (fd);
 }
 
@@ -72,21 +70,8 @@ int	set_tabs(t_data *data, int fd)
 	str = get_next_line(fd);
 	while (str)
 	{
-		if (empty_line(str))
-		{
-			tab = ft_split(str, ' ');
-			if (Check_line_start(tab) == -1)
-				return (print_error("Ligne invalide dans la map"));
-			replace_last_char(tab);
-			if (tab_size(tab) != 2)
-			{
-				free(str);
-				free_tab(tab);
-				return(print_error("Incorrect informations format"));
-			}
-			if (fill_data(data, tab) == -1)
-				return (-1);
-		}
+		if (check_inside(data, str, tab) != 0)
+			return (-1);
 		free(str);
 		if (check_dbstruct(data) == 6)
 			break ;
@@ -100,17 +85,14 @@ int	set_tabs(t_data *data, int fd)
 	return (check_map(data, fd, str));
 }
 
-// check av and init map
 int	read_input(int ac, char **av, t_data *data)
 {
 	int		fd;
-	
+
 	fd = ft_check_av(ac, av);
 	if (fd < 0)
 		return (fd);
-	else if(set_tabs(data, fd) == -1)
+	else if (set_tabs(data, fd) == -1)
 		return (-1);
 	return (0);
 }
-
-

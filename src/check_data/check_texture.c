@@ -28,8 +28,9 @@ int	check_xpm_file(char *str)
 	return (0);
 }
 
-// check if NO file is fill in data struct, access fct allows to check if path is valid, (2^0 = 1)
-int	check_NO_fill(t_data *data, char **tab)
+// check if NO file is fill in data struct, access fct allows to check if path
+// is valid, (2^0 = 1)
+int	check_no_fill(t_data *data, char **tab)
 {
 	if (ft_strncmp("NO", tab[0], 2))
 		return (1);
@@ -46,14 +47,14 @@ int	check_NO_fill(t_data *data, char **tab)
 	}
 	if (check_xpm_file(tab[1]) != 0)
 		return (-1);
-	data->texture.NO_path = pro_malloc(sizeof(char) * \
+	data->texture.no_path = pro_malloc(sizeof(char) * \
 	(ft_strlen(tab[1]) + 1));
-	data->texture.NO_path = ft_strdup(tab[1]);
+	data->texture.no_path = ft_strdup(tab[1]);
 	return (0);
 }
 
 // 2^1 = 2
-int	check_SO_fill(t_data *data, char **tab)
+int	check_so_fill(t_data *data, char **tab)
 {
 	if (ft_strncmp("SO", tab[0], 2))
 		return (1);
@@ -70,13 +71,13 @@ int	check_SO_fill(t_data *data, char **tab)
 	}
 	if (check_xpm_file(tab[1]) != 0)
 		return (-1);
-	data->texture.SO_path = pro_malloc(sizeof(char) * \
+	data->texture.so_path = pro_malloc(sizeof(char) * \
 	(ft_strlen(tab[1]) + 1));
-	data->texture.SO_path = ft_strdup(tab[1]);
+	data->texture.so_path = ft_strdup(tab[1]);
 	return (0);
 }
 
-int	check_WE_fill(t_data *data, char **tab)
+int	check_we_fill(t_data *data, char **tab)
 {
 	if (ft_strncmp("WE", tab[0], 2))
 		return (1);
@@ -93,13 +94,13 @@ int	check_WE_fill(t_data *data, char **tab)
 	}
 	if (check_xpm_file(tab[1]) == -1)
 		return (-1);
-	data->texture.WE_path = pro_malloc(sizeof(char) * \
+	data->texture.we_path = pro_malloc(sizeof(char) * \
 	(ft_strlen(tab[1]) + 1));
-	data->texture.WE_path = ft_strdup(tab[1]);
+	data->texture.we_path = ft_strdup(tab[1]);
 	return (0);
 }
 
-int	check_EA_fill(t_data *data, char **tab)
+int	check_ea_fill(t_data *data, char **tab)
 {
 	if (ft_strncmp("EA", tab[0], 2))
 		return (1);
@@ -107,7 +108,7 @@ int	check_EA_fill(t_data *data, char **tab)
 	{
 		printf("ERROR : Doublon dans EA\n");
 		return (-1);
-	};
+	}
 	data->texture.no_dup.east = 1;
 	if (access(tab[1], R_OK))
 	{
@@ -116,8 +117,8 @@ int	check_EA_fill(t_data *data, char **tab)
 	}
 	if (check_xpm_file(tab[1]) == -1)
 		return (-1);
-	data->texture.EA_path = pro_malloc(sizeof(char) * \
+	data->texture.ea_path = pro_malloc(sizeof(char) * \
 	(ft_strlen(tab[1]) + 1));
-	data->texture.EA_path = ft_strdup(tab[1]);
+	data->texture.ea_path = ft_strdup(tab[1]);
 	return (0);
 }

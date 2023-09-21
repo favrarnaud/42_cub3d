@@ -31,11 +31,14 @@ SRCS			:=	main.c \
 					utils/read_utils.c \
 					utils/error.c \
 					check_data/read_input.c \
+					check_data/read_input2.c \
 					check_data/fill_data.c \
 					check_data/data_utils.c \
 					check_data/check_texture.c \
 					check_data/check_map.c \
+					check_data/check_map2.c \
 					check_data/map_utils.c \
+					check_data/map_utils2.c \
 					check_data/free_data.c \
 
 SRCS			:=	$(SRCS:%=$(SRC_DIR)/%)

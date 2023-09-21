@@ -41,11 +41,10 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-
 int	tab_size(char **tab)
 {
 	int	i;
-	
+
 	i = 0;
 	while (tab[i])
 		i++;

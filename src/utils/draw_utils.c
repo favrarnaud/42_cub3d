@@ -20,42 +20,43 @@ int		new_color(int r, int g, int b, int a)
 	return (color);
 }
 
-void	add_pixel(t_data *data, t_img *img, int x, int y, int color)
+void	add_pixel(t_data *data, int x, int y, int color)
 {
 	char    *pixel;
 
-	if ((x >= data->mlx.screen_width || x <= 0 || y >= data->mlx.screen_height || y <= 0))
+	if ((x >= data->mlx.screen_width || x <= 0 || \
+	y >= data->mlx.screen_height || y <= 0))
 		return;
-	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	pixel = data->img.addr + (y * data->img.line_len + x * (data->img.bpp / 8));
 	*(int *)pixel = color;
 }
 
-void	render_rect(t_data *data, int x, int y, int height, int width, int color)
+void	render_rect(t_data *data, t_point t, t_rect r, int color)
 {
 	int	i;
 	int j;
 
-	i = y;
-	while (i < (y + height))
+	i = (int)t.y;
+	while (i < (t.y + r.height))
 	{
-		j = x;
-		while (j < (x + width))
+		j = (int)t.x;
+		while (j < (t.x + r.width))
 		{
-			add_pixel(data, &data->img, j, i, color);
+			add_pixel(data, j, i, color);
 			j++;
 		}
 		++i;
 	}
 }
 
-void	render_line(t_data *data, int col, int start, int end, int color)
+void	render_line(t_data *data, int col, t_point t, int color)
 {
 	int i;
 
-	i = start;
-	while (i < end)
+	i = (int)t.x;
+	while (i < t.y)
 	{
-		add_pixel(data, &data->img, col, i, color);
+		add_pixel(data, col, i, color);
 		i++;
 	}
 }

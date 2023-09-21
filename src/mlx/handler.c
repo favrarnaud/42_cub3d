@@ -29,49 +29,49 @@ int move_key(int keycode, void *param) {
 		exit(0);
 	if (keycode == KEY_LEFT)
 	{
-		oldDirX = data->cam.dirX;
-		data->cam.dirX = data->cam.dirX * cos(data->cam.r_sp) - data->cam.dirY * sin(data->cam.r_sp);
-		data->cam.dirY = oldDirX * sin(data->cam.r_sp) + data->cam.dirY * cos(data->cam.r_sp);
-		old_planeX = data->cam.planeX;
-		data->cam.planeX = data->cam.planeX * cos(data->cam.r_sp) - data->cam.planeY * sin(data->cam.r_sp);
-		data->cam.planeY = old_planeX * sin(data->cam.r_sp) + data->cam.planeY * cos(data->cam.r_sp);
+		oldDirX = data->cam.dir_x;
+		data->cam.dir_x = data->cam.dir_x * cos(data->cam.r_sp) - data->cam.dir_y * sin(data->cam.r_sp);
+		data->cam.dir_y = oldDirX * sin(data->cam.r_sp) + data->cam.dir_y * cos(data->cam.r_sp);
+		old_planeX = data->cam.plane_x;
+		data->cam.plane_x = data->cam.plane_x * cos(data->cam.r_sp) - data->cam.plane_y * sin(data->cam.r_sp);
+		data->cam.plane_y = old_planeX * sin(data->cam.r_sp) + data->cam.plane_y * cos(data->cam.r_sp);
 	}
 	if (keycode == KEY_RIGHT)
 	{
-		oldDirX = data->cam.dirX;
-		data->cam.dirX = data->cam.dirX * cos(-data->cam.r_sp) - data->cam.dirY * sin(-data->cam.r_sp);
-		data->cam.dirY = oldDirX * sin(-data->cam.r_sp) + data->cam.dirY * cos(-data->cam.r_sp);
-		old_planeX = data->cam.planeX;
-		data->cam.planeX = data->cam.planeX * cos(-data->cam.r_sp) - data->cam.planeY * sin(-data->cam.r_sp);
-		data->cam.planeY = old_planeX * sin(-data->cam.r_sp) + data->cam.planeY * cos(-data->cam.r_sp);
+		oldDirX = data->cam.dir_x;
+		data->cam.dir_x = data->cam.dir_x * cos(-data->cam.r_sp) - data->cam.dir_y * sin(-data->cam.r_sp);
+		data->cam.dir_y = oldDirX * sin(-data->cam.r_sp) + data->cam.dir_y * cos(-data->cam.r_sp);
+		old_planeX = data->cam.plane_x;
+		data->cam.plane_x = data->cam.plane_x * cos(-data->cam.r_sp) - data->cam.plane_y * sin(-data->cam.r_sp);
+		data->cam.plane_y = old_planeX * sin(-data->cam.r_sp) + data->cam.plane_y * cos(-data->cam.r_sp);
 	}
 	if (keycode == KEY_W)
 	{
-		if(data->map.map[(int)(data->player.posX + data->cam.dirX * data->cam.m_sp)][(int)(data->player.posY)] == 'F')
-			data->player.posX += data->cam.dirX * data->cam.m_sp;
-		if(data->map.map[(int)(data->player.posX)][(int)(data->player.posY + data->cam.dirY * data->cam.m_sp)] == 'F')
-			data->player.posY += data->cam.dirY * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.pos_x + data->cam.dir_x * data->cam.m_sp)][(int)(data->player.pos_y)] == 'F')
+			data->player.pos_x += data->cam.dir_x * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.pos_x)][(int)(data->player.pos_y + data->cam.dir_y * data->cam.m_sp)] == 'F')
+			data->player.pos_y += data->cam.dir_y * data->cam.m_sp;
 	}
 	if (keycode == KEY_A)
 	{
-		if(data->map.map[(int)(data->player.posX - data->cam.dirY * data->cam.m_sp)][(int)(data->player.posY)] == 'F')
-			data->player.posX -= data->cam.dirY * data->cam.m_sp;
-		if(data->map.map[(int)(data->player.posX)][(int)(data->player.posY + data->cam.dirX * data->cam.m_sp)] == 'F')
-			data->player.posY += data->cam.dirX * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.pos_x - data->cam.dir_y * data->cam.m_sp)][(int)(data->player.pos_y)] == 'F')
+			data->player.pos_x -= data->cam.dir_y * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.pos_x)][(int)(data->player.pos_y + data->cam.dir_x * data->cam.m_sp)] == 'F')
+			data->player.pos_y += data->cam.dir_x * data->cam.m_sp;
 	}
 	if (keycode == KEY_S)
 	{
-		if(data->map.map[(int)(data->player.posX - data->cam.dirX * data->cam.m_sp)][(int)(data->player.posY)] == 'F')
-			data->player.posX -= data->cam.dirX * data->cam.m_sp;
-		if(data->map.map[(int)(data->player.posX)][(int)(data->player.posY - data->cam.dirY * data->cam.m_sp)] == 'F')
-			data->player.posY -= data->cam.dirY * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.pos_x - data->cam.dir_x * data->cam.m_sp)][(int)(data->player.pos_y)] == 'F')
+			data->player.pos_x -= data->cam.dir_x * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.pos_x)][(int)(data->player.pos_y - data->cam.dir_y * data->cam.m_sp)] == 'F')
+			data->player.pos_y -= data->cam.dir_y * data->cam.m_sp;
 	}
 	if (keycode == KEY_D)
 	{
-		if(data->map.map[(int)(data->player.posX + data->cam.dirY * data->cam.m_sp)][(int)(data->player.posY)] == 'F')
-			data->player.posX += data->cam.dirY * data->cam.m_sp;
-		if(data->map.map[(int)(data->player.posX)][(int)(data->player.posY - data->cam.dirX * data->cam.m_sp)] == 'F')
-			data->player.posY -= data->cam.dirX * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.pos_x + data->cam.dir_y * data->cam.m_sp)][(int)(data->player.pos_y)] == 'F')
+			data->player.pos_x += data->cam.dir_y * data->cam.m_sp;
+		if(data->map.map[(int)(data->player.pos_x)][(int)(data->player.pos_y - data->cam.dir_x * data->cam.m_sp)] == 'F')
+			data->player.pos_y -= data->cam.dir_x * data->cam.m_sp;
 	}
 	update_img(data);
 	return (0);

@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   map_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: afavre <afavre@student.42lausanne>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/25 16:39:42 by bberger           #+#    #+#             */
-/*   Updated: 2023/08/25 17:03:57 by bberger          ###   ########.fr       */
+/*   Created: 2023/09/21 16:19:47 by afavre            #+#    #+#             */
+/*   Updated: 2023/09/21 16:19:49 by afavre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_all(t_data *data)
+void	set_orientation(t_data *data, char c)
 {
-	free(data->texture.no_path);
-	free(data->texture.so_path);
-	free(data->texture.we_path);
-	free(data->texture.ea_path);
-	free_tab(data->map.map);
+//	if (c == 'N')
+//		data->ray.angle = 270;
+//	else if (c == 'S')
+//		//TODO change this value
+//		data->ray.angle = 45;
+//	else if (c == 'W')
+//		data->ray.angle = 180;
+//	else if (c == 'E')
+//		data->ray.angle = 0;
 }

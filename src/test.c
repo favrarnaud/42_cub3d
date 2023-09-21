@@ -31,6 +31,7 @@ void test(t_data *data)
 	int stepY;
 	int hit;
 	int side;
+	t_point t;
 
 	x = 0;
 	h = data->mlx.screen_height;
@@ -39,10 +40,10 @@ void test(t_data *data)
 	while (x < w)
 	{
 		cameraX = 2 * x / (double)data->mlx.screen_width - 1;
-		rayDirX = data->cam.dirX + data->cam.planeX * cameraX;
-		rayDirY = data->cam.dirY + data->cam.planeY * cameraX;
-		mapX = (int)data->player.posX;
-		mapY = (int)data->player.posY;
+		rayDirX = data->cam.dir_x + data->cam.plane_x * cameraX;
+		rayDirY = data->cam.dir_y + data->cam.plane_y * cameraX;
+		mapX = (int)data->player.pos_x;
+		mapY = (int)data->player.pos_y;
 		x++;
 
 		if (rayDirX == 0)
@@ -57,22 +58,22 @@ void test(t_data *data)
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (data->player.posX - mapX) * deltaDistX;
+			sideDistX = (data->player.pos_x - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - data->player.posX) * deltaDistX;
+			sideDistX = (mapX + 1.0 - data->player.pos_x) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (data->player.posY - mapY) * deltaDistY;
+			sideDistY = (data->player.pos_y - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - data->player.posY) * deltaDistY;
+			sideDistY = (mapY + 1.0 - data->player.pos_y) * deltaDistY;
 		}
 		hit = 0;
 		while (hit == 0) {
@@ -96,16 +97,16 @@ void test(t_data *data)
 				perpWallDist = (sideDistY - deltaDistY);
 
 		int lineheight = (int)(h / perpWallDist);
-		int drawstart = -(lineheight) / 2 + h/2;
-		if ( drawstart < 0 )
-			drawstart = 0;
-		int drawend = lineheight / 2 + h/2;
-		if (drawend >= h)
-			drawend = h - 1;
+		t.x = -(lineheight) / 2 + h/2;
+		if ( t.x < 0 )
+			t.x = 0;
+		t.y = lineheight / 2 + h/2;
+		if (t.y >= h)
+			t.y = h - 1;
 		int color;
 			color = 0x0000FF;
 		if (side == 1)
 			color = color /2;
-		render_line(data, x, drawstart, drawend, color);
+		render_line(data, x, t, color);
 	}
 }

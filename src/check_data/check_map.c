@@ -24,14 +24,14 @@ int	verify_map(t_data *data)
 void	fill_tab_x(char **map, int tab_len, int len)
 {
 	int	x;
-	int y;
+	int	y;
 
 	y = 0;
-	while(y < tab_len)
+	while (y < tab_len)
 	{
 		map[y] = pro_malloc((len + 1) * (sizeof(char)));
 		x = 0;
-		while(x < len)
+		while (x < len)
 		{
 			map[y][x] = 'x';
 			x++;
@@ -45,16 +45,16 @@ void	fill_tab_x(char **map, int tab_len, int len)
 void	fill_map(char **map, char **tab_tmp, int h_len)
 {
 	int	y;
-	int x;
+	int	x;
 
 	y = 1;
 	while (y < h_len - 1)
 	{
 		x = 1;
-		while (map[y][x] && tab_tmp[y-1][x-1])
+		while (map[y][x] && tab_tmp[y - 1][x - 1])
 		{
-			if (tab_tmp[y-1][x-1] != 'x' && tab_tmp[y-1][x-1] != ' ')
-				map[y][x] = tab_tmp[y-1][x-1];
+			if (tab_tmp[y - 1][x - 1] != 'x' && tab_tmp[y - 1][x - 1] != ' ')
+				map[y][x] = tab_tmp[y - 1][x - 1];
 			x++;
 		}
 		y++;
@@ -63,27 +63,27 @@ void	fill_map(char **map, char **tab_tmp, int h_len)
 
 int	longest_str(char **tab_tmp)
 {
-	int i;
-	size_t max_len;
+	int		i;
+	size_t	max_len;
 
 	i = 0;
 	max_len = ft_strlen(tab_tmp[i]);
 	while (tab_tmp[i])
 	{
-		if (ft_strlen(tab_tmp[i+1]) >= max_len)
-			max_len = ft_strlen(tab_tmp[i+1]);
-		i++; 
+		if (ft_strlen(tab_tmp[i + 1]) >= max_len)
+			max_len = ft_strlen(tab_tmp[i + 1]);
+		i++;
 	}
 	return ((int)max_len);
 }
 
-int		check_map(t_data *data, int fd, char *fstr)
+int	check_map(t_data *data, int fd, char *fstr)
 {
 	char	*tmp;
 	char	*tmp2;
 	char	**tab_tmp;
 	char	*str;
-	
+
 	tmp = NULL;
 	str = ft_strdup(fstr);
 	free(fstr);
@@ -99,16 +99,9 @@ int		check_map(t_data *data, int fd, char *fstr)
 		tmp2 = tmp;
 		tmp = ft_strjoin(tmp, str);
 		free(tmp2);
-		free(str);
 		str = get_next_line(fd);
 	}
-	tab_tmp = ft_split(tmp, '\n');
 	free(tmp);
-
-	data->map.height = tab_size(tab_tmp) + 2;
-	data->map.width = longest_str(tab_tmp) + 2;
-	data->map.map = pro_malloc((data->map.height + 1) * (sizeof(char *)));
-	fill_tab_x(data->map.map, data->map.height, data->map.width);
-	fill_map(data->map.map, tab_tmp, data->map.height);
+	set_map_info(data, &tab_tmp, &tmp);
 	return (verify_map(data));
 }

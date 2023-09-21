@@ -25,10 +25,10 @@ void	init_data(t_data *data)
 	data->texture.no_dup.floor = 0;
 	data->texture.no_dup.ceilling = 0;
 
-	data->cam.dirX = -1;
-	data->cam.dirY = 0;
-	data->cam.planeX = 0;
-	data->cam.planeY = 0.66;
+	data->cam.dir_x = -1;
+	data->cam.dir_y = 0;
+	data->cam.plane_x = 0;
+	data->cam.plane_y = 0.66;
 	data->cam.r_sp = 0.05;
 	data->cam.m_sp = 0.1;
 }
