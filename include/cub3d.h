@@ -86,7 +86,7 @@ typedef struct s_cam
 	double dirY;
 	double planeX;
 	double planeY;
-	double rot_speed;
+	double r_sp;
 }	t_cam;
 
 typedef struct s_data {

@@ -29,5 +29,6 @@ void	draw_background(t_data *data)
 void	update_img(t_data *data)
 {
 	draw_background(data);
+	test(data);
 	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.mlx_img, 0, 0);
 }

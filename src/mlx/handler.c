@@ -13,16 +13,6 @@
 #include "cub3d.h"
 #include <float.h>
 
-int	key_handler(int key, void *param)
-{
-	t_data *data;
-
-	data = param;
-	if (key == KEY_ESC)
-		exit(0);
-	return (0);
-}
-
 int	close_game(t_data *data)
 {
 	mlx_destroy_window(data->mlx.ptr, data->mlx.win);
@@ -31,18 +21,36 @@ int	close_game(t_data *data)
 
 int move_key(int keycode, void *param) {
 	t_data *data;
-	data = param;
+	double oldDirX;
+	double old_planeX;
 
+	data = param;
+	if (keycode == KEY_ESC)
+		exit(0);
 	if (keycode == KEY_LEFT)
 	{
-		printf("ducon\n");
+		oldDirX = data->cam.dirX;
+		data->cam.dirX = data->cam.dirX * cos(data->cam.r_sp) - data->cam.dirY * sin(data->cam.r_sp);
+		data->cam.dirY = oldDirX * sin(data->cam.r_sp) + data->cam.dirY * cos(data->cam.r_sp);
+		old_planeX = data->cam.planeX;
+		data->cam.planeX = data->cam.planeX * cos(data->cam.r_sp) - data->cam.planeY * sin(data->cam.r_sp);
+		data->cam.planeY = old_planeX * sin(data->cam.r_sp) + data->cam.planeY * cos(data->cam.r_sp);
 	}
-	return (-2147483647);
+	if (keycode == KEY_RIGHT)
+	{
+		oldDirX = data->cam.dirX;
+		data->cam.dirX = data->cam.dirX * cos(-data->cam.r_sp) - data->cam.dirY * sin(-data->cam.r_sp);
+		data->cam.dirY = oldDirX * sin(-data->cam.r_sp) + data->cam.dirY * cos(-data->cam.r_sp);
+		old_planeX = data->cam.planeX;
+		data->cam.planeX = data->cam.planeX * cos(-data->cam.r_sp) - data->cam.planeY * sin(-data->cam.r_sp);
+		data->cam.planeY = old_planeX * sin(-data->cam.r_sp) + data->cam.planeY * cos(-data->cam.r_sp);
+	}
+	update_img(data);
+	return (0);
 }
 
 void	init_event(t_data *data)
 {
 	mlx_hook(data->mlx.win, 17, 0, close_game, data);
 	mlx_hook(data->mlx.win, 2, (1L<<0), move_key, data);
-	mlx_key_hook(data->mlx.win, key_handler, NULL);
 }

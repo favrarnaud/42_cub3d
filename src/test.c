@@ -35,10 +35,6 @@ void test(t_data *data)
 	x = 0;
 	h = data->mlx.screen_height;
 	w = data->mlx.screen_width;
-	data->cam.dirX = -1;
-	data->cam.dirY = 0;
-	data->cam.planeX = 0;
-	data->cam.planeY = 0.66;
 
 	while (x < w)
 	{
@@ -89,18 +85,15 @@ void test(t_data *data)
 				mapY += stepY;
 				side = 1;
 			}
-			printf("data ---> x = %d, y = %d -----> %c\n", mapX, mapY, data->map.map[mapX][mapY]);
 			if (data->map.map[mapX][mapY] == '1')
 			{
 				hit = 1;
 			}
 		}
-			printf("side ---> %d\n", side);
 			if (side == 0)
 				perpWallDist = (sideDistX - deltaDistX);
 			else
 				perpWallDist = (sideDistY - deltaDistY);
-			printf("dist de %d ---> %f\n", x, perpWallDist);
 
 		int lineheight = (int)(h / perpWallDist);
 		int drawstart = -(lineheight) / 2 + h/2;
