@@ -6,7 +6,7 @@
 /*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:03:07 by afavre            #+#    #+#             */
-/*   Updated: 2023/09/22 14:33:50 by bberger          ###   ########.fr       */
+/*   Updated: 2023/09/22 15:30:44 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,4 +242,7 @@ void	phase2(t_data *data);
 void	phase3(t_data *data);
 void	phase4(t_data *data);
 t_wall_face	get_face(t_data *data);
+
+//color_utils.c
+int		get_color(t_data *data);
 #endif

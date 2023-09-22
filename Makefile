@@ -21,6 +21,7 @@ SRC_DIR			:=	src
 SRCS			:=	main.c \
 					raycast/main_raycast.c \
 					raycast/raycast_utils.c \
+					raycast/color_utils.c \
 					mlx/init_mlx.c \
 					mlx/handler.c \
 					mlx/key_movement.c \
