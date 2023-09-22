@@ -18,23 +18,6 @@ void	la_gauche(t_data *data)
 	double	old_plane_x;
 
 	old_dir_x = data->cam.dir_x;
-	data->cam.dir_x = data->cam.dir_x * cos(data->cam.r_sp) - \
-	data->cam.dir_y * sin(data->cam.r_sp);
-	data->cam.dir_y = old_dir_x * sin(data->cam.r_sp) + data->cam.dir_y * \
-	cos(data->cam.r_sp);
-	old_plane_x = data->cam.plane_x;
-	data->cam.plane_x = data->cam.plane_x * cos(data->cam.r_sp) - \
-	data->cam.plane_y * sin(data->cam.r_sp);
-	data->cam.plane_y = old_plane_x * sin(data->cam.r_sp) + data->cam.plane_y * \
-	cos(data->cam.r_sp);
-}
-
-void	la_droite(t_data *data)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = data->cam.dir_x;
 	data->cam.dir_x = data->cam.dir_x * cos(-data->cam.r_sp) - \
 	data->cam.dir_y * sin(-data->cam.r_sp);
 	data->cam.dir_y = old_dir_x * sin(-data->cam.r_sp) + data->cam.dir_y * \
@@ -44,4 +27,21 @@ void	la_droite(t_data *data)
 	data->cam.plane_y * sin(-data->cam.r_sp);
 	data->cam.plane_y = old_plane_x * sin(-data->cam.r_sp) + \
 	data->cam.plane_y * cos(-data->cam.r_sp);
+}
+
+void	la_droite(t_data *data)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = data->cam.dir_x;
+	data->cam.dir_x = data->cam.dir_x * cos(data->cam.r_sp) - \
+	data->cam.dir_y * sin(data->cam.r_sp);
+	data->cam.dir_y = old_dir_x * sin(data->cam.r_sp) + data->cam.dir_y * \
+	cos(data->cam.r_sp);
+	old_plane_x = data->cam.plane_x;
+	data->cam.plane_x = data->cam.plane_x * cos(data->cam.r_sp) - \
+	data->cam.plane_y * sin(data->cam.r_sp);
+	data->cam.plane_y = old_plane_x * sin(data->cam.r_sp) + data->cam.plane_y * \
+	cos(data->cam.r_sp);
 }
