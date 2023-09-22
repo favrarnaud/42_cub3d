@@ -6,7 +6,7 @@
 /*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:03:07 by afavre            #+#    #+#             */
-/*   Updated: 2023/09/19 14:08:41 by bberger          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:33:50 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_raycast
 	int hit;
 	int side;
 	t_point t;
+	t_wall_face	wall;	
 }	t_raycast;
 
 typedef struct s_data {

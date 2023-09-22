@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afavre <afavre@student.42lausanne>         +#+  +:+       +#+        */
+/*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:43:06 by afavre            #+#    #+#             */
-/*   Updated: 2023/09/21 17:43:07 by afavre           ###   ########.fr       */
+/*   Updated: 2023/09/22 14:54:51 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,23 @@ void	phase4(t_data *data)
 }
 
 t_wall_face	get_face(t_data *data)
-{
+{	
 	if (data->raycast.side == 0)
 	{
-		if (data->raycast.stepX == -1)
-			printf("nord");
+		if (data->raycast.rayDirX >= 0)
+			data->raycast.wall = NORTH;
 		else
-			printf("sud");
+			data->raycast.wall = SOUTH;
+		
 	}
 	if (data->raycast.side == 1)
 	{
-		if (data->raycast.stepX == -1)
-			printf("est");
+		if (data->raycast.rayDirY >= 0)
+			data->raycast.wall = WEST;
 		else
-			printf("west");
+			data->raycast.wall = EAST;
 	}
+	return (NONE);		
 }
+
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afavre <afavre@student.42lausanne>         +#+  +:+       +#+        */
+/*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:36:03 by afavre            #+#    #+#             */
-/*   Updated: 2023/09/21 17:36:05 by afavre           ###   ########.fr       */
+/*   Updated: 2023/09/22 14:59:57 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ void	raycast(t_data *data)
 		phase3(data);
 		phase4(data);
 		get_face(data);
-		printf("test ---> %d\n", data->raycast.side);
-		color = 0x0000FF;
-		if (data->raycast.side == 1)
-			color = color / 2;
 		render_line(data, data->raycast.x, data->raycast.t, color);
 	}
 }
