@@ -22,6 +22,7 @@ SRCS			:=	main.c \
 					raycast/main_raycast.c \
 					raycast/raycast_utils.c \
 					raycast/color_utils.c \
+					raycast/init_textures.c \
 					mlx/init_mlx.c \
 					mlx/handler.c \
 					mlx/key_movement.c \

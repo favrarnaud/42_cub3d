@@ -6,7 +6,7 @@
 /*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:36:03 by afavre            #+#    #+#             */
-/*   Updated: 2023/09/22 15:28:09 by bberger          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:52:45 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	raycast(t_data *data)
 		phase3(data);
 		phase4(data);
 		get_face(data);
+		init_tex(data);
 		render_line(data, data->raycast.x, data->raycast.t, get_color(data));
 	}
 }

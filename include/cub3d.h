@@ -6,7 +6,7 @@
 /*   By: bberger <bberger@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:03:07 by afavre            #+#    #+#             */
-/*   Updated: 2023/09/22 15:30:44 by bberger          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:40:11 by bberger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,13 @@ typedef struct s_mlx {
 	int			screen_height;
 }	t_mlx;
 
+typedef struct s_tex_img
+{
+	void	*img;
+	int		img_width;
+	int 	img_height;
+} t_tex_img;
+
 typedef struct s_texture
 {
 	t_nodb		no_dup;
@@ -97,7 +104,13 @@ typedef struct s_texture
 	char		*ea_path;
 	int			f_color;
 	int			c_color;
+	t_tex_img	no_tex;
+	t_tex_img	so_tex;
+	t_tex_img	we_tex;
+	t_tex_img	ea_tex;
+	
 }	t_texture;
+
 
 typedef struct s_cam
 {
@@ -245,4 +258,7 @@ t_wall_face	get_face(t_data *data);
 
 //color_utils.c
 int		get_color(t_data *data);
+
+//init_textures.c
+void	init_tex(t_data *data);
 #endif
