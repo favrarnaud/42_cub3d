@@ -237,5 +237,8 @@ void	raycast(t_data *data);
 
 //raycast_utils.c
 void	phase1(t_data *data);
-
+void	phase2(t_data *data);
+void	phase3(t_data *data);
+void	phase4(t_data *data);
+t_wall_face	get_face(t_data *data);
 #endif

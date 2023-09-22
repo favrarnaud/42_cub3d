@@ -12,85 +12,33 @@
 
 #include "cub3d.h"
 
-void raycast(t_data *data)
+void	raycast(t_data *data)
 {
-	t_raycast ray;
+	int	color;
 
-	ray = data->raycast;
-	ray.x = 0;
-	ray.h = data->mlx.screen_height;
-	ray.w = data->mlx.screen_width;
-
-	while (ray.x < ray.w)
+	data->raycast.x = 0;
+	data->raycast.h = data->mlx.screen_height;
+	data->raycast.w = data->mlx.screen_width;
+	while (data->raycast.x < data->raycast.w)
 	{
-		ray.cameraX = 2 * ray.x / (double)data->mlx.screen_width - 1;
-		ray.rayDirX = data->cam.dir_x + data->cam.plane_x * ray.cameraX;
-		ray.rayDirY = data->cam.dir_y + data->cam.plane_y * ray.cameraX;
-		ray.mapX = (int)data->player.pos_x;
-		ray.mapY = (int)data->player.pos_y;
-		ray.x++;
+		data->raycast.cameraX = 2 * data->raycast.x / \
+			(double)data->mlx.screen_width - 1;
+		data->raycast.rayDirX = data->cam.dir_x + data->cam.plane_x * \
+			data->raycast.cameraX;
+		data->raycast.rayDirY = data->cam.dir_y + data->cam.plane_y * \
+			data->raycast.cameraX;
+		data->raycast.mapX = (int)data->player.pos_x;
+		data->raycast.mapY = (int)data->player.pos_y;
+		data->raycast.x++;
 		phase1(data);
-		if (ray.rayDirX == 0)
-			ray.deltaDistX = 1e30;
-		else
-			ray.deltaDistX = fabs(1 / ray.rayDirX);
-		if (ray.rayDirY == 0)
-			ray.deltaDistY = 1e30;
-		else
-			ray.deltaDistY = fabs(1 / ray.rayDirY);
-		printf("test --> %f, %f\n", ray.deltaDistX, ray.deltaDistY);
-		if (ray.rayDirX < 0)
-		{
-			ray.stepX = -1;
-			ray.sideDistX = (data->player.pos_x - ray.mapX) * ray.deltaDistX;
-		}
-		else
-		{
-			ray.stepX = 1;
-			ray.sideDistX = (ray.mapX + 1.0 - data->player.pos_x) * ray.deltaDistX;
-		}
-		if (ray.rayDirY < 0)
-		{
-			ray.stepY = -1;
-			ray.sideDistY = (data->player.pos_y - ray.mapY) * ray.deltaDistY;
-		}
-		else
-		{
-			ray.stepY = 1;
-			ray.sideDistY = (ray.mapY + 1.0 - data->player.pos_y) * ray.deltaDistY;
-		}
-		ray.hit = 0;
-		while (ray.hit == 0) {
-			if (ray.sideDistX < ray.sideDistY) {
-				ray.sideDistX += ray.deltaDistX;
-				ray.mapX += ray.stepX;
-				ray.side = 0;
-			} else {
-				ray.sideDistY += ray.deltaDistY;
-				ray.mapY += ray.stepY;
-				ray.side = 1;
-			}
-			if (data->map.map[ray.mapX][ray.mapY] == '1')
-			{
-				ray.hit = 1;
-			}
-		}
-		if (ray.side == 0)
-			ray.perpWallDist = (ray.sideDistX - ray.deltaDistX);
-		else
-			ray.perpWallDist = (ray.sideDistY - ray.deltaDistY);
-
-		int lineheight = (int)(ray.h / ray.perpWallDist);
-		ray.t.x = -(lineheight) / 2 + ray.h/2;
-		if ( ray.t.x < 0 )
-			ray.t.x = 0;
-		ray.t.y = lineheight / 2 + ray.h/2;
-		if (ray.t.y >= ray.h)
-			ray.t.y = ray.h - 1;
-		int color;
+		phase2(data);
+		phase3(data);
+		phase4(data);
+		get_face(data);
+		printf("test ---> %d\n", data->raycast.side);
 		color = 0x0000FF;
-		if (ray.side == 1)
-			color = color /2;
-		render_line(data, ray.x, ray.t, color);
+		if (data->raycast.side == 1)
+			color = color / 2;
+		render_line(data, data->raycast.x, data->raycast.t, color);
 	}
 }
