@@ -21,6 +21,8 @@ SRC_DIR			:=	src
 SRCS			:=	main.c \
 					raycast/main_raycast.c \
 					raycast/raycast_utils.c \
+					raycast/raycast_utils2.c \
+					raycast/block_utils.c \
 					raycast/color_utils.c \
 					raycast/init_textures.c \
 					mlx/init_mlx.c \
@@ -43,6 +45,7 @@ SRCS			:=	main.c \
 					check_data/map_utils.c \
 					check_data/map_utils2.c \
 					check_data/free_data.c \
+					draw_test.c \
 
 SRCS			:=	$(SRCS:%=$(SRC_DIR)/%)
 

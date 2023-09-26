@@ -12,27 +12,68 @@
 
 #include "cub3d.h"
 
+int	check_block(t_data *data)
+{
+	if (data->raycast.mapX == data->raycast.oldX && data->raycast.mapY == \
+		data->raycast.oldY && data->raycast.wall == data->raycast.oldface)
+	{
+		data->raycast.oldX = data->raycast.mapX;
+		data->raycast.oldY = data->raycast.mapY;
+		data->raycast.oldface = data->raycast.wall;
+		return (1);
+	}
+	else
+	{
+		data->raycast.oldX = data->raycast.mapX;
+		data->raycast.oldY = data->raycast.mapY;
+		data->raycast.oldface = data->raycast.wall;
+		return (0);
+	}
+}
+
+int	pixtur(t_data *data, double tx, double ty)
+{
+	char	*pixel;
+
+	pixel = data->texture.no_tex.img + ((int)ty * data->img.line_len + \
+		(int)tx * (data->img.bpp / 8));
+	return (*(int *)pixel);
+}
+
+void	draw_col(t_data *data)
+{
+
+}
+
 void	raycast(t_data *data)
 {
-	data->raycast.x = 0;
-	data->raycast.h = data->mlx.screen_height;
-	data->raycast.w = data->mlx.screen_width;
+	int nb_col;
+	t_block	block;
+
+	nb_col = 0;
+	init_block(&block);
+	phasem1(data);
 	while (data->raycast.x < data->raycast.w)
 	{
-		data->raycast.cameraX = 2 * data->raycast.x / \
-			(double)data->mlx.screen_width - 1;
-		data->raycast.rayDirX = data->cam.dir_x + data->cam.plane_x * \
-			data->raycast.cameraX;
-		data->raycast.rayDirY = data->cam.dir_y + data->cam.plane_y * \
-			data->raycast.cameraX;
-		data->raycast.mapX = (int)data->player.pos_x;
-		data->raycast.mapY = (int)data->player.pos_y;
-		data->raycast.x++;
+		phase0(data);
 		phase1(data);
 		phase2(data);
 		phase3(data);
 		phase4(data);
 		get_face(data);
-		render_line(data, data->raycast.x, data->raycast.t, get_color(data));
+		render_line(data, data->raycast.x, data->raycast.t, \
+		get_color(data));
+		if (check_block(data) == 1)
+		{
+			nb_col++;
+		}
+		else if (data->raycast.x != 0)
+		{
+			render_line(data, data->raycast.x, data->raycast.t, new_color(255, 255, 255, 0));
+			block.width = nb_col;
+
+			nb_col = 1;
+		}
+		data->raycast.x++;
 	}
 }

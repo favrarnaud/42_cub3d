@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key.h                                              :+:      :+:    :+:   */
+/*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afavre <afavre@student.42lausanne>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,17 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_H
-# define KEY_H
+#ifndef DEFINE_H
+# define DEFINE_H
 
+// KEYBOARD
 # define KEY_ESC	53
-
 # define KEY_W		13
 # define KEY_A		0
 # define KEY_S		1
 # define KEY_D		2
-
 # define KEY_LEFT	123
 # define KEY_RIGHT	124
+
+//TEXTURES
+# define TEXHEIGHT	64
+# define TEXWIDTH	64
 
 #endif

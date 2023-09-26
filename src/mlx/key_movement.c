@@ -51,6 +51,3 @@ void	moonwalk_droit(t_data *data)
 	data->cam.dir_x * data->cam.m_sp)] == 'F')
 		data->player.pos_y += data->cam.dir_x * data->cam.m_sp;
 }
-
-
-

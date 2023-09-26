@@ -31,6 +31,14 @@ void	add_pixel(t_data *data, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
+int get_pixel_color(t_img *image, int x, int y)
+{
+	int location;
+
+	location = (x * image->bpp / 8) + (y * image->line_len);
+	return (*(int *)(image->addr + location));
+}
+
 void	render_rect(t_data *data, t_point t, t_rect r, int color)
 {
 	int	i;

@@ -19,142 +19,8 @@
 # include "../libs/libft/gnl/include/get_next_line.h"
 # include "../libs/libft/libft/include/libft.h"
 # include "../libs/miniLibX/mlx.h"
-# include "key.h"
-
-typedef enum t_face
-{
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST,
-	NONE
-}	t_wall_face;
-
-typedef struct s_trash
-{
-	int			dup;
-	int 		tx;
-	int 		ty;
-}	t_trash;
-
-typedef struct s_point
-{
-	double		x;
-	double		y;
-}	t_point;
-
-typedef struct s_rect
-{
-	double		height;
-	double		width;
-}	t_rect;
-
-typedef struct s_player
-{
-	double		pos_x;
-	double		pos_y;
-}	t_player;
-
-typedef struct s_nodb
-{
-	int			north;
-	int			south;
-	int			east;
-	int			west;
-	int			floor;
-	int			ceilling;
-}	t_nodb;
-
-typedef struct s_img
-{
-	void		*mlx_img;
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
-}	t_img;
-
-typedef struct s_map {
-	char		**map;
-	int			**tab;
-	int			height;
-	int			width;
-}	t_map;
-
-typedef struct s_mlx {
-	void		*ptr;
-	void		*win;
-	int			screen_width;
-	int			screen_height;
-}	t_mlx;
-
-typedef struct s_tex_img
-{
-	void	*img;
-	int		img_width;
-	int 	img_height;
-} t_tex_img;
-
-typedef struct s_texture
-{
-	t_nodb		no_dup;
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
-	int			f_color;
-	int			c_color;
-	t_tex_img	no_tex;
-	t_tex_img	so_tex;
-	t_tex_img	we_tex;
-	t_tex_img	ea_tex;
-	
-}	t_texture;
-
-
-typedef struct s_cam
-{
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
-	double		r_sp;
-	double		m_sp;
-}	t_cam;
-
-typedef struct s_raycast
-{
-	int x;
-	int	h;
-	int	w;
-	double cameraX;
-	double rayDirX;
-	double rayDirY;
-	int mapX;
-	int mapY;
-	double sideDistX;
-	double sideDistY;
-	double deltaDistX;
-	double deltaDistY;
-	double perpWallDist;
-	int stepX;
-	int stepY;
-	int hit;
-	int side;
-	t_point t;
-	t_wall_face	wall;	
-}	t_raycast;
-
-typedef struct s_data {
-	t_mlx		mlx;
-	t_map		map;
-	t_img		img;
-	t_player	player;
-	t_cam		cam;
-	t_texture	texture;
-	t_raycast	raycast;
-	t_trash		trash;
-}	t_data;
+# include "define.h"
+# include "struct.h"
 
 // ---> MLX
 //init_mlx.c
@@ -239,6 +105,7 @@ void	print_map(t_data *data);
 //draw_utils.c
 int		new_color(int r, int g, int b, int a);
 void	add_pixel(t_data *data, int x, int y, int color);
+int		get_pixel_color(t_img *image, int x, int y);
 void	render_rect(t_data *data, t_point t, t_rect rect, int color);
 void	render_line(t_data *data, int col, t_point t, int color);
 
@@ -256,9 +123,19 @@ void	phase3(t_data *data);
 void	phase4(t_data *data);
 t_wall_face	get_face(t_data *data);
 
+// raycast_utils2.c
+void	phase0(t_data *data);
+void	phasem1(t_data *data);
+
+// block_utils.c
+void init_block(t_block *block);
+
 //color_utils.c
 int		get_color(t_data *data);
 
 //init_textures.c
 void	init_tex(t_data *data);
+
+//draw_test.c
+void draw_test(t_data *data);
 #endif
