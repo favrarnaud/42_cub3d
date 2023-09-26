@@ -14,8 +14,6 @@
 
 void	raycast(t_data *data)
 {
-	int	color;
-
 	data->raycast.x = 0;
 	data->raycast.h = data->mlx.screen_height;
 	data->raycast.w = data->mlx.screen_width;
@@ -35,7 +33,6 @@ void	raycast(t_data *data)
 		phase3(data);
 		phase4(data);
 		get_face(data);
-		init_tex(data);
 		render_line(data, data->raycast.x, data->raycast.t, get_color(data));
 	}
 }

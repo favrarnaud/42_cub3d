@@ -24,4 +24,5 @@ void	init_mlx(t_data *data)
 	data->img.addr = mlx_get_data_addr(data->img.mlx_img, \
 	&data->img.bpp, &data->img.line_len, &data->img.endian);
 	init_event(data);
+	init_tex(data);
 }
