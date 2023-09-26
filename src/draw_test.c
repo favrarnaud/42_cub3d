@@ -21,8 +21,8 @@ void	draw_test(t_data *data)
 	t_point	po;
 
 	po.x = 0;
-	stepx = 64.0 / 1920.0;
-	stepy = 64.0 / 1080.0;
+	stepx = TEXWIDTH / data->mlx.screen_width;
+	stepy = TEXHEIGHT / data->mlx.screen_height;
 	while (po.x < data->mlx.screen_height)
 	{
 		x = 0;
@@ -30,7 +30,7 @@ void	draw_test(t_data *data)
 		while (po.y < data->mlx.screen_width)
 		{
 			add_pixel(data, (int)po.y, (int)po.x, \
-			get_pixel_color(&data->texture.so_data, (int)x, \
+			get_pixel_color(&data->texture.no_data, (int)x, \
 			(int)y));
 			x += stepx;
 			po.y++;
