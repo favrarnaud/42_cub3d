@@ -24,7 +24,6 @@ SRCS			:=	main.c \
 					raycast/raycast_utils.c \
 					raycast/raycast_utils2.c \
 					raycast/block_draw.c \
-					utils/color_utils.c \
 					raycast/init_textures.c \
 					mlx/init_mlx.c \
 					mlx/handler.c \
@@ -35,6 +34,7 @@ SRCS			:=	main.c \
 					utils/block_utils.c \
 					utils/draw_utils.c \
 					utils/malloc.c \
+					utils/color_utils.c \
 					utils/read_utils.c \
 					utils/error.c \
 					check_data/read_input.c \

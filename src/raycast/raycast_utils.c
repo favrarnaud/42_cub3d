@@ -91,7 +91,7 @@ void	phase4(t_data *data)
 	data->raycast.t.y = lineheight / 2 + data->raycast.h / 2;
 	if (data->raycast.t.y >= data->raycast.h)
 		data->raycast.t.y = data->raycast.h - 1;
-	//add_height(&data->block, lineheight);
+	add_height(&data->block, lineheight);
 }
 
 t_wall_face	get_face(t_data *data)
@@ -99,17 +99,17 @@ t_wall_face	get_face(t_data *data)
 	if (data->raycast.side == 0)
 	{
 		if (data->raycast.rayDirX >= 0)
-			data->raycast.wall = NORTH;
+			add_face(&data->block, NORTH);
 		else
-			data->raycast.wall = SOUTH;
+			add_face(&data->block, SOUTH);
 		
 	}
 	if (data->raycast.side == 1)
 	{
 		if (data->raycast.rayDirY >= 0)
-			data->raycast.wall = WEST;
+			add_face(&data->block, WEST);
 		else
-			data->raycast.wall = EAST;
+			add_face(&data->block, EAST);
 	}
 	return (NONE);		
 }

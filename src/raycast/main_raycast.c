@@ -15,18 +15,18 @@
 int	check_block(t_data *data)
 {
 	if (data->raycast.mapX == data->raycast.oldX && data->raycast.mapY == \
-		data->raycast.oldY && data->raycast.wall == data->raycast.oldface)
+		data->raycast.oldY && data->block.face[data->raycast.x] == data->raycast.oldface)
 	{
 		data->raycast.oldX = data->raycast.mapX;
 		data->raycast.oldY = data->raycast.mapY;
-		data->raycast.oldface = data->raycast.wall;
+		data->raycast.oldface = data->block.face[data->raycast.x];
 		return (1);
 	}
 	else
 	{
 		data->raycast.oldX = data->raycast.mapX;
 		data->raycast.oldY = data->raycast.mapY;
-		data->raycast.oldface = data->raycast.wall;
+		data->raycast.oldface = data->block.face[data->raycast.x];
 		return (0);
 	}
 }
@@ -53,13 +53,14 @@ void	raycast(t_data *data)
 		else if (data->raycast.x != 0)
 		{
 			render_line(data, data->raycast.x, data->raycast.t, new_color(255, 255, 255, 0));
-			//add_width(&data->block, temp_width);
+			add_width(&data->block, temp_width);
 			temp_width = 0;
 		}
 		if (data->raycast.x == 1919)
 		{
-			//add_width(&data->block, temp_width);
+			add_width(&data->block, temp_width);
 		}
 		data->raycast.x++;
 	}
+	draw_col(data);
 }

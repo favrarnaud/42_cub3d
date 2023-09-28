@@ -85,9 +85,6 @@ int		check_line_start(char **tab);
 // map_utils2.c
 void	set_orientation(t_data *data, char c);
 
-// free_data.c
-//void	free_all(t_data *data);
-
 // read_utils.c
 int		divided_line(char *str);
 
@@ -149,5 +146,6 @@ void	free_all(t_data *data);
 //debug.c
 void	print_block_info(t_block *block);
 void	print_int_tab(int *test, int size);
+void	test(t_data *data);
 
 #endif

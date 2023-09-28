@@ -14,13 +14,13 @@
 
 int	get_color(t_data *data)
 {
-	if (data->raycast.wall == NORTH)
+	if (data->block.face[data->raycast.x] == NORTH)
 		return (new_color(255, 0, 0, 0));
-	else if (data->raycast.wall == SOUTH)
+	else if (data->block.face[data->raycast.x] == SOUTH)
 		return (new_color(0, 255, 0, 0));
-	else if (data->raycast.wall == WEST)
+	else if (data->block.face[data->raycast.x] == WEST)
 		return (new_color(0, 0, 255, 0));
-	else if (data->raycast.wall == EAST)
+	else if (data->block.face[data->raycast.x] == EAST)
 		return (new_color(0, 0, 0, 0));
 	return (new_color(45, 41, 56, 0));
 }

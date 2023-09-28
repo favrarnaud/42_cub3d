@@ -155,6 +155,7 @@ typedef struct s_texture_load
 
 typedef struct s_block
 {
+	int xcol;
 	int *width;
 	int *height;
 	int *face;

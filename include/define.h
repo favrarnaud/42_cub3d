@@ -27,7 +27,7 @@
 # define KEY_RIGHT	124
 
 //TEXTURES
-# define TEXHEIGHT	512.0
-# define TEXWIDTH	512.0
+# define TEXHEIGHT	64.0
+# define TEXWIDTH	64.0
 
 #endif

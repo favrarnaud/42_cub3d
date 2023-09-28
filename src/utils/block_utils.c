@@ -18,6 +18,7 @@ void	init_block(t_block *block)
 	block->nb_width = 0;
 	block->nb_height = 0;
 	block->nb_face = 0;
+	block->xcol = 0;
 	block->width = NULL;
 	block->height = NULL;
 	block->face = NULL;
@@ -85,10 +86,6 @@ void	add_face(t_block *block, int new_face)
 
 void	free_all(t_data *data)
 {
-	free(data->texture.no_path);
-	free(data->texture.so_path);
-	free(data->texture.ea_path);
-	free(data->texture.we_path);
 	free(data->block.width);
 	free(data->block.height);
 	free(data->block.face);
