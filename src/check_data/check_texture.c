@@ -47,8 +47,6 @@ int	check_no_fill(t_data *data, char **tab)
 	}
 	if (check_xpm_file(tab[1]) != 0)
 		return (-1);
-	data->texture.no_path = pro_malloc(sizeof(char) * \
-	(ft_strlen(tab[1]) + 1));
 	data->texture.no_path = ft_strdup(tab[1]);
 	return (0);
 }
@@ -71,8 +69,6 @@ int	check_so_fill(t_data *data, char **tab)
 	}
 	if (check_xpm_file(tab[1]) != 0)
 		return (-1);
-	data->texture.so_path = pro_malloc(sizeof(char) * \
-	(ft_strlen(tab[1]) + 1));
 	data->texture.so_path = ft_strdup(tab[1]);
 	return (0);
 }
@@ -94,8 +90,6 @@ int	check_we_fill(t_data *data, char **tab)
 	}
 	if (check_xpm_file(tab[1]) == -1)
 		return (-1);
-	data->texture.we_path = pro_malloc(sizeof(char) * \
-	(ft_strlen(tab[1]) + 1));
 	data->texture.we_path = ft_strdup(tab[1]);
 	return (0);
 }
@@ -117,8 +111,6 @@ int	check_ea_fill(t_data *data, char **tab)
 	}
 	if (check_xpm_file(tab[1]) == -1)
 		return (-1);
-	data->texture.ea_path = pro_malloc(sizeof(char) * \
-	(ft_strlen(tab[1]) + 1));
 	data->texture.ea_path = ft_strdup(tab[1]);
 	return (0);
 }

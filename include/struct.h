@@ -155,10 +155,12 @@ typedef struct s_texture_load
 
 typedef struct s_block
 {
-	int width;
+	int *width;
 	int *height;
-	int height_len;
-
+	int *face;
+	int nb_width;
+	int nb_height;
+	int nb_face;
 }	t_block;
 
 typedef struct s_data {
@@ -170,6 +172,7 @@ typedef struct s_data {
 	t_texture	texture;
 	t_raycast	raycast;
 	t_trash		trash;
+	t_block		block;
 }	t_data;
 
 #endif

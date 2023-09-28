@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-void	free_all(t_data *data)
-{
-	free(data->texture.no_path);
-	free(data->texture.so_path);
-	free(data->texture.we_path);
-	free(data->texture.ea_path);
-	free_tab(data->map.map);
-}
+//void	free_all(t_data *data)
+//{
+//	free(data->texture.no_path);
+//	free(data->texture.so_path);
+//	free(data->texture.we_path);
+//	free(data->texture.ea_path);
+//	free_tab(data->map.map);
+//}

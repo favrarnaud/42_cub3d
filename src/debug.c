@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   block_utils.c                                      :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afavre <afavre@student.42lausanne>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 19:08:05 by afavre            #+#    #+#             */
-/*   Updated: 2023/09/26 19:08:06 by afavre           ###   ########.fr       */
+/*   Created: 2023/09/27 14:40:29 by afavre            #+#    #+#             */
+/*   Updated: 2023/09/27 14:40:41 by afavre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_block(t_block *block)
+void print_block_info(t_block *block)
 {
-	block->height_len = 1;
-	block->height = malloc(sizeof(int) * 1);
-	block->height[0] = -1;
-	block->width = 0;
+	printf("debug");
 }
 
-t_block	add_height(t_block block, int height)
+void	print_int_tab(int *test, int size)
 {
-	t_block nb;
-	int i;
+	int i = 0;
 
-	i = 0;
-	nb.width = block.width;
-	nb.height_len = block.height_len + 1;
-	nb.height = malloc(sizeof(int) * nb.height_len);
-	while (i < nb.height_len)
+	while (i < size)
 	{
-		break;
+		printf("value --> %d\n", test[i]);
+		i++;
 	}
-	return (nb);
 }

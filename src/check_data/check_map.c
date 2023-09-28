@@ -59,6 +59,7 @@ void	fill_map(char **map, char **tab_tmp, int h_len)
 		}
 		y++;
 	}
+	free_char_tab(tab_tmp);
 }
 
 int	longest_str(char **tab_tmp)
@@ -99,6 +100,7 @@ int	check_map(t_data *data, int fd, char *fstr)
 		tmp2 = tmp;
 		tmp = ft_strjoin(tmp, str);
 		free(tmp2);
+		free(str);
 		str = get_next_line(fd);
 	}
 	free(tmp);

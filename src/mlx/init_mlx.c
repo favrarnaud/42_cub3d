@@ -14,8 +14,8 @@
 
 void	init_mlx(t_data *data)
 {
-	data->mlx.screen_width = 1920;
-	data->mlx.screen_height = 1080;
+	data->mlx.screen_width = WINDOWWIDTH;
+	data->mlx.screen_height = WINDOWHEIGHT;
 	data->mlx.ptr = mlx_init();
 	data->mlx.win = mlx_new_window(data->mlx.ptr, \
 	data->mlx.screen_width, data->mlx.screen_height, "Cube3d");

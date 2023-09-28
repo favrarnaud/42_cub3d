@@ -75,6 +75,7 @@ int		check_map(t_data *data, int fd, char *fstr);
 
 // check_map2.c
 void	set_map_info(t_data *data, char ***tab_tmp, char **tmp);
+void	free_char_tab(char **tab);
 
 // map_utils.c
 int		check_char_dup(t_data *data);
@@ -85,7 +86,7 @@ int		check_line_start(char **tab);
 void	set_orientation(t_data *data, char c);
 
 // free_data.c
-void	free_all(t_data *data);
+//void	free_all(t_data *data);
 
 // read_utils.c
 int		divided_line(char *str);
@@ -128,7 +129,9 @@ void	phase0(t_data *data);
 void	phasem1(t_data *data);
 
 // block_utils.c
-void init_block(t_block *block);
+
+int		pixtur(t_data *data, double tx, double ty);
+void	draw_col(t_data *data);
 
 //color_utils.c
 int		get_color(t_data *data);
@@ -136,6 +139,15 @@ int		get_color(t_data *data);
 //init_textures.c
 void	init_tex(t_data *data);
 
-//draw_test.c
-void draw_test(t_data *data);
+//block_utils.c
+void	init_block(t_block *block);
+void	add_height(t_block *block, int new_height);
+void	add_width(t_block *block, int new_width);
+void	add_face(t_block *block, int new_face);
+void	free_all(t_data *data);
+
+//debug.c
+void	print_block_info(t_block *block);
+void	print_int_tab(int *test, int size);
+
 #endif

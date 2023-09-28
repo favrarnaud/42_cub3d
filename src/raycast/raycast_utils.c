@@ -91,6 +91,7 @@ void	phase4(t_data *data)
 	data->raycast.t.y = lineheight / 2 + data->raycast.h / 2;
 	if (data->raycast.t.y >= data->raycast.h)
 		data->raycast.t.y = data->raycast.h - 1;
+	//add_height(&data->block, lineheight);
 }
 
 t_wall_face	get_face(t_data *data)

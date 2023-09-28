@@ -21,3 +21,16 @@ void	set_map_info(t_data *data, char ***tab_tmp, char **tmp)
 	fill_tab_x(data->map.map, data->map.height, data->map.width);
 	fill_map(data->map.map, *tab_tmp, data->map.height);
 }
+
+void	free_char_tab(char **tab)
+{
+	int i = 0;
+
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	tab = NULL;
+}

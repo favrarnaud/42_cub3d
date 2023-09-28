@@ -31,27 +31,12 @@ int	check_block(t_data *data)
 	}
 }
 
-int	pixtur(t_data *data, double tx, double ty)
-{
-	char	*pixel;
-
-	pixel = data->texture.no_tex.img + ((int)ty * data->img.line_len + \
-		(int)tx * (data->img.bpp / 8));
-	return (*(int *)pixel);
-}
-
-void	draw_col(t_data *data)
-{
-
-}
-
 void	raycast(t_data *data)
 {
-	int nb_col;
-	t_block	block;
+	int temp_width;
 
-	nb_col = 0;
-	init_block(&block);
+	temp_width = 0;
+	init_block(&data->block);
 	phasem1(data);
 	while (data->raycast.x < data->raycast.w)
 	{
@@ -64,15 +49,16 @@ void	raycast(t_data *data)
 		render_line(data, data->raycast.x, data->raycast.t, \
 		get_color(data));
 		if (check_block(data) == 1)
-		{
-			nb_col++;
-		}
+			temp_width++;
 		else if (data->raycast.x != 0)
 		{
 			render_line(data, data->raycast.x, data->raycast.t, new_color(255, 255, 255, 0));
-			block.width = nb_col;
-
-			nb_col = 1;
+			//add_width(&data->block, temp_width);
+			temp_width = 0;
+		}
+		if (data->raycast.x == 1919)
+		{
+			//add_width(&data->block, temp_width);
 		}
 		data->raycast.x++;
 	}

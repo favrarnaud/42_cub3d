@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.h                                           :+:      :+:    :+:   */
+/*   block_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afavre <afavre@student.42lausanne>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/23 09:39:40 by afavre            #+#    #+#             */
-/*   Updated: 2023/06/23 09:39:42 by afavre           ###   ########.fr       */
+/*   Created: 2023/09/26 19:08:05 by afavre            #+#    #+#             */
+/*   Updated: 2023/09/26 19:08:06 by afavre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
-# define DEFINE_H
+#include "cub3d.h"
 
-// SCREEN
-# define WINDOWWIDTH	1980
-# define WINDOWHEIGHT	1080
+int	pixtur(t_data *data, double tx, double ty)
+{
+	char	*pixel;
 
-// KEYBOARD
-# define KEY_ESC	53
-# define KEY_W		13
-# define KEY_A		0
-# define KEY_S		1
-# define KEY_D		2
-# define KEY_LEFT	123
-# define KEY_RIGHT	124
+	pixel = data->texture.no_tex.img + ((int)ty * data->img.line_len + \
+		(int)tx * (data->img.bpp / 8));
+	return (*(int *)pixel);
+}
 
-//TEXTURES
-# define TEXHEIGHT	512.0
-# define TEXWIDTH	512.0
+void	draw_col(t_data *data)
+{
+	int i;
 
-#endif
+	i = 0;
+	while (i < data->block.nb_width)
+	{
+		i++;
+	}
+}
