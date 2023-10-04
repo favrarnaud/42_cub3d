@@ -12,27 +12,12 @@
 
 #include "cub3d.h"
 
-int	check_block(t_data *data)
-{
-	if (data->raycast.mapX == data->raycast.oldX && data->raycast.mapY == \
-		data->raycast.oldY && data->block.face[data->raycast.x] == data->raycast.oldface)
-	{
-		data->raycast.oldX = data->raycast.mapX;
-		data->raycast.oldY = data->raycast.mapY;
-		data->raycast.oldface = data->block.face[data->raycast.x];
-		return (1);
-	}
-	else
-	{
-		data->raycast.oldX = data->raycast.mapX;
-		data->raycast.oldY = data->raycast.mapY;
-		data->raycast.oldface = data->block.face[data->raycast.x];
-		return (0);
-	}
-}
+
 
 void	raycast(t_data *data)
 {
+    t_img img;
+
 	init_block(&data->block);
 	phasem1(data);
 	while (data->raycast.x < data->raycast.w)
@@ -42,7 +27,7 @@ void	raycast(t_data *data)
 		phase2(data);
 		phase3(data);
 		phase4(data);
-		get_face(data);
+		img = get_face(data);
         double wallX;
         if (data->raycast.side == 0) wallX = data->player.pos_y + data->raycast.perpWallDist * data->raycast.rayDirY;
         else           wallX = data->player.pos_x + data->raycast.perpWallDist * data->raycast.rayDirX;
@@ -56,11 +41,11 @@ void	raycast(t_data *data)
         {
             int texY = (int)texPos & ((int)TEXHEIGHT - 1);
             texPos += step;
-            int color = get_pixel_color(&data->texture.so_data, data->raycast.x, texY);
+            int color = get_pixel_color(&img, data->raycast.x, texY);
         if(data->raycast.side == 1) color = (color >> 1) & 8355711;
             add_pixel(data, data->raycast.x, y, color);
         }
-        mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.mlx_img, 0, 0);
 		data->raycast.x++;
 	}
+    mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.mlx_img, 0, 0);
 }

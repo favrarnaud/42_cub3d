@@ -94,24 +94,22 @@ void	phase4(t_data *data)
 	add_height(&data->block, lineheight);
 }
 
-t_wall_face	get_face(t_data *data)
-{	
-	if (data->raycast.side == 0)
-	{
-		if (data->raycast.rayDirX >= 0)
-			add_face(&data->block, NORTH);
-		else
-			add_face(&data->block, SOUTH);
-		
-	}
-	if (data->raycast.side == 1)
-	{
-		if (data->raycast.rayDirY >= 0)
-			add_face(&data->block, WEST);
-		else
-			add_face(&data->block, EAST);
-	}
-	return (NONE);		
+t_img get_face(t_data *data)
+{
+    if (data->raycast.side == 0)
+    {
+        if (data->raycast.rayDirX >= 0)
+            return (data->texture.no_data);
+        else
+            return (data->texture.so_data);
+
+    }
+    if (data->raycast.side == 1)
+    {
+        if (data->raycast.rayDirY >= 0)
+            return (data->texture.we_data);
+        else
+            return (data->texture.ea_data);
+    }
+    return (data->texture.no_data);
 }
-
-

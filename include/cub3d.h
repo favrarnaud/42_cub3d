@@ -119,7 +119,7 @@ void	phase1(t_data *data);
 void	phase2(t_data *data);
 void	phase3(t_data *data);
 void	phase4(t_data *data);
-t_wall_face	get_face(t_data *data);
+t_img get_face(t_data *data);
 
 // raycast_utils2.c
 void	phase0(t_data *data);
