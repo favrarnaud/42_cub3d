@@ -1,0 +1,13 @@
+//		render_line(data, data->raycast.x, data->raycast.t, get_color(data));
+//		if (check_block(data) == 1)
+//			temp_width++;
+//		else if (data->raycast.x != 0)
+//		{
+//			render_line(data, data->raycast.x, data->raycast.t, new_color(255, 255, 255, 0));
+//			add_width(&data->block, temp_width);
+//			temp_width = 0;
+//		}
+//		if (data->raycast.x == 1919)
+//		{
+//			add_width(&data->block, temp_width);
+//		}

@@ -33,9 +33,6 @@ int	check_block(t_data *data)
 
 void	raycast(t_data *data)
 {
-	int temp_width;
-
-	temp_width = 0;
 	init_block(&data->block);
 	phasem1(data);
 	while (data->raycast.x < data->raycast.w)
@@ -46,21 +43,24 @@ void	raycast(t_data *data)
 		phase3(data);
 		phase4(data);
 		get_face(data);
-		render_line(data, data->raycast.x, data->raycast.t, \
-		get_color(data));
-		if (check_block(data) == 1)
-			temp_width++;
-		else if (data->raycast.x != 0)
-		{
-			render_line(data, data->raycast.x, data->raycast.t, new_color(255, 255, 255, 0));
-			add_width(&data->block, temp_width);
-			temp_width = 0;
-		}
-		if (data->raycast.x == 1919)
-		{
-			add_width(&data->block, temp_width);
-		}
+        double wallX;
+        if (data->raycast.side == 0) wallX = data->player.pos_y + data->raycast.perpWallDist * data->raycast.rayDirY;
+        else           wallX = data->player.pos_x + data->raycast.perpWallDist * data->raycast.rayDirX;
+        wallX -= floor((wallX));
+        int texX = (int)(wallX);
+        if(data->raycast.side == 0 && data->raycast.rayDirX > 0) texX = TEXWIDTH - texX - 1;
+        if(data->raycast.side == 1 && data->raycast.rayDirY < 0) texX = TEXWIDTH - texX - 1;
+        double step = 1.0 * TEXHEIGHT / data->block.height[data->raycast.x];
+        double texPos = ((data->raycast.t.x - WINDOWHEIGHT) / 2 + data->block.height[data->raycast.x] / 2) * step;
+        for(int y = (int)data->raycast.t.x; y < data->raycast.t.y; y++)
+        {
+            int texY = (int)texPos & ((int)TEXHEIGHT - 1);
+            texPos += step;
+            int color = get_pixel_color(&data->texture.so_data, data->raycast.x, texY);
+        if(data->raycast.side == 1) color = (color >> 1) & 8355711;
+            add_pixel(data, data->raycast.x, y, color);
+        }
+        mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.mlx_img, 0, 0);
 		data->raycast.x++;
 	}
-	draw_col(data);
 }

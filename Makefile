@@ -23,7 +23,6 @@ SRCS			:=	main.c \
 					raycast/main_raycast.c \
 					raycast/raycast_utils.c \
 					raycast/raycast_utils2.c \
-					raycast/block_draw.c \
 					raycast/init_textures.c \
 					mlx/init_mlx.c \
 					mlx/handler.c \
@@ -70,7 +69,7 @@ all: $(NAME)
 $(NAME): $(LIBS_TARGET) $(OBJS)
 	@tput setaf 2; cat ascii_art/cub3d_ascii; tput setaf 7
 	@echo "$(BLUE)Compilation des objets lier a cub3d en cours"
-	@$(CC) -Llibs/miniLibX -Llibs/libft -framework OpenGL -framework AppKit $(LDLIBS) $(OBJS) -o $(NAME)
+	@$(CC) -Llibs/miniLibX -Llibs/libft -framework OpenGL -framework AppKit $(LDLIBS) $(OBJS) -o $(NAME) -g3
 
 $(LIBS_TARGET):
 	@$(MAKE) -C $(@D)

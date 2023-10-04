@@ -127,9 +127,6 @@ void	phasem1(t_data *data);
 
 // block_utils.c
 
-int		pixtur(t_data *data, double tx, double ty);
-void	draw_col(t_data *data);
-
 //color_utils.c
 int		get_color(t_data *data);
 
